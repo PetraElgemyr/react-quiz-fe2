@@ -1,0 +1,26 @@
+.question-card {
+    border: 1px solid purple;
+
+    .option {
+        color: grey;
+    }
+
+    .-correct {
+        // color: green;
+        // font-style: italic;
+        color: black;
+        font-style: italic;
+    }
+
+
+    .-choosen-incorrect {
+        font-weight: bold;
+        color: red;
+    }
+
+    .-choosen-correct {
+        font-weight: bold;
+        color: green;
+    }
+    
+}
