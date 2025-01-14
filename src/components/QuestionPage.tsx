@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { IQuestion } from "./interfaces/IQuestion";
-import { fetchData } from "./services/DataServices";
 import { QuestionCard } from "./QuestionCard";
+import { useAppContext } from "./hooks/useAppContext";
 
 export const QuestionPage = () => {
-  const [questions, setQuestions] = useState<IQuestion[]>([]);
+  const { questions } = useAppContext();
+
   const [counter, setCounter] = useState(10);
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
 
@@ -19,19 +19,6 @@ export const QuestionPage = () => {
     }
     return () => clearInterval(timer);
   }, [counter, currentQuestion]);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await fetchData();
-        if (data) setQuestions(data);
-      } catch (error) {
-        console.error("Failed to fetch questions:", error);
-      }
-    };
-
-    getData();
-  }, []);
 
   return (
     <>
