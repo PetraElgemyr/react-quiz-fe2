@@ -40,12 +40,13 @@ export const QuestionPage = () => {
       setCounter((previousSec) => (previousSec > 0 ? previousSec - 1 : 0));
     }, 1000);
 
-    if (counter === 0 && currentQuestionNumber < questions.length - 1) {
+    if (counter === 0) {
       registerEmptyAnswer();
       triggerNextQuestionWhenNoAnswer();
-    }
-    if (currentQuestionNumber === questions.length - 1 && counter === 0) {
-      triggerResultPage();
+
+      if (currentQuestionNumber === questions.length - 1) {
+        triggerResultPage();
+      }
     }
 
     return () => clearInterval(timer);
