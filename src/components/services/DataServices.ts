@@ -41,7 +41,7 @@ import { IQuestion } from "../interfaces/IQuestion";
 
 export const fetchData = async () => {
   const data: IQuestion[] = await axios
-    .get("../../../data.json")
+    .get("./data.json")
     .then((response) => response.data)
     .catch((error) => console.log(error));
 
