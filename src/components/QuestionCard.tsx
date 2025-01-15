@@ -1,6 +1,7 @@
 import { useAppContext } from "./hooks/useAppContext";
 import { IAnswer } from "./interfaces/IAnswer";
 import { IQuestion } from "./interfaces/IQuestion";
+import { Player } from "./models/Player";
 
 interface IQuestionCardProps {
   question: IQuestion;
@@ -11,7 +12,36 @@ export const QuestionCard = ({
   question,
   triggerNewQuestion,
 }: IQuestionCardProps) => {
-  const { currentPlayer, setCurrentPlayer } = useAppContext();
+  const { questions, currentPlayer, setCurrentPlayer, setPlayers } =
+    useAppContext();
+
+  const updateScoreForCurrentPlayer = (currentNewAnswers: Player) => {
+    let scores = 0;
+    questions.forEach((q, index) => {
+      if (q.answer === currentNewAnswers.answers[index]?.answer) {
+        scores += 1;
+      }
+    });
+
+    const updatedPlayerWithScores = { ...currentNewAnswers };
+    if (currentNewAnswers.score !== scores) {
+      updatedPlayerWithScores.score = scores;
+    }
+    return updatedPlayerWithScores;
+  };
+
+  const updateAnswerInLS = (updatedCurrentToSave: Player) => {
+    const jsonPlayers: Player[] = JSON.parse(
+      localStorage.getItem("players") ?? "[]"
+    );
+    const currentPlayerIndex = jsonPlayers.findIndex(
+      (p) => p.id === updatedCurrentToSave.id
+    );
+
+    jsonPlayers[currentPlayerIndex] = updatedCurrentToSave;
+    localStorage.setItem("players", JSON.stringify(jsonPlayers));
+    setPlayers(jsonPlayers);
+  };
 
   const registerAnswer = (clickedAnswer: string) => {
     const existingAnswer = currentPlayer.answers.find(
@@ -36,7 +66,10 @@ export const QuestionCard = ({
         },
       ];
     }
-    setCurrentPlayer({ ...currentPlayer, answers: updatedAnswers });
+    const newCurrentPlayer = { ...currentPlayer, answers: updatedAnswers };
+    const updatedCurrentToSave = updateScoreForCurrentPlayer(newCurrentPlayer);
+    updateAnswerInLS(updatedCurrentToSave);
+    setCurrentPlayer(updatedCurrentToSave);
     triggerNewQuestion();
   };
 

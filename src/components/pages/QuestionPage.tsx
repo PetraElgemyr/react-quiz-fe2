@@ -28,7 +28,7 @@ export const QuestionPage = () => {
     });
   }, [currentPlayer, setCurrentPlayer, questions, currentQuestionNumber]);
 
-  const triggerNextQuestionWhenNoAnswer = useCallback(() => {
+  const triggerNextQuestion = useCallback(() => {
     setCurrentQuestionNumber(currentQuestionNumber + 1);
     setCounter(10);
   }, [currentQuestionNumber, setCurrentQuestionNumber, setCounter]);
@@ -44,7 +44,7 @@ export const QuestionPage = () => {
 
     if (counter === 0) {
       registerEmptyAnswer();
-      triggerNextQuestionWhenNoAnswer();
+      triggerNextQuestion();
 
       if (currentQuestionNumber === questions.length - 1) {
         triggerResultPage();
@@ -58,7 +58,7 @@ export const QuestionPage = () => {
     currentQuestionNumber,
     questions,
     navigate,
-    triggerNextQuestionWhenNoAnswer,
+    triggerNextQuestion,
     registerEmptyAnswer,
     triggerResultPage,
   ]);
@@ -73,9 +73,9 @@ export const QuestionPage = () => {
             triggerNewQuestion={() => {
               if (currentQuestionNumber === questions.length - 1) {
                 triggerResultPage();
+                return;
               }
-              setCurrentQuestionNumber(currentQuestionNumber + 1);
-              setCounter(10);
+              triggerNextQuestion();
             }}
             key={questions[currentQuestionNumber].id}
             question={questions[currentQuestionNumber]}
