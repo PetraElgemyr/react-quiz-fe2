@@ -1,23 +1,25 @@
 import { useEffect } from "react";
-import { useAppContext } from "./hooks/useAppContext";
-import "./scss/resultPage.scss";
-import { IQuestion } from "./interfaces/IQuestion";
+import "../scss/resultPage.scss";
+import { useAppContext } from "../hooks/useAppContext";
+import { IQuestion } from "../interfaces/IQuestion";
 
 export const ResultPage = () => {
-  const { currentScore, questions, answers, setCurrentScore } = useAppContext();
+  const { questions, currentPlayer, setCurrentPlayer } = useAppContext();
 
   useEffect(() => {
     let scores = 0;
     questions.forEach((q, index) => {
-      if (q.answer === answers[index].answer) {
+      if (q.answer === currentPlayer.answers[index].answer) {
         scores += 1;
       }
     });
-    setCurrentScore(scores);
-  }, [answers, currentScore, setCurrentScore, questions]);
+    setCurrentPlayer({ ...currentPlayer, score: scores });
+  }, [currentPlayer, setCurrentPlayer, questions]);
 
   const returnCorrectAnswerClassName = (question: IQuestion, opt: string) => {
-    const answerToQuestion = answers.find((a) => a.questionId === question.id);
+    const answerToQuestion = currentPlayer.answers.find(
+      (a) => a.questionId === question.id
+    );
     let className = "";
 
     if (answerToQuestion && answerToQuestion.answer === opt) {
@@ -38,7 +40,7 @@ export const ResultPage = () => {
       <h3>Ditt resultat:</h3>
 
       <p>
-        Du fick {currentScore} rätt av {questions.length} möjliga!
+        Du fick {currentPlayer.score} rätt av {questions.length} möjliga!
       </p>
 
       {questions.map((q) => (

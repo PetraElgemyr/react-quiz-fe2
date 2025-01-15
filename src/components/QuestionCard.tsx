@@ -11,15 +11,17 @@ export const QuestionCard = ({
   question,
   triggerNewQuestion,
 }: IQuestionCardProps) => {
-  const { answers, setAnswers } = useAppContext();
+  const { currentPlayer, setCurrentPlayer } = useAppContext();
 
   const registerAnswer = (clickedAnswer: string) => {
-    const existingAnswer = answers.find((a) => a.questionId === question.id);
+    const existingAnswer = currentPlayer.answers.find(
+      (a) => a.questionId === question.id
+    );
 
     let updatedAnswers: IAnswer[] = [];
 
     if (existingAnswer !== undefined) {
-      updatedAnswers = answers.map((a: IAnswer) => {
+      updatedAnswers = currentPlayer.answers.map((a: IAnswer) => {
         if (a.questionId === question.id) {
           a.answer = clickedAnswer;
         }
@@ -27,15 +29,14 @@ export const QuestionCard = ({
       });
     } else {
       updatedAnswers = [
-        ...answers,
+        ...currentPlayer.answers,
         {
           questionId: question.id,
           answer: clickedAnswer,
         },
       ];
     }
-    setAnswers([...updatedAnswers]);
-
+    setCurrentPlayer({ ...currentPlayer, answers: updatedAnswers });
     triggerNewQuestion();
   };
 

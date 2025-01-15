@@ -1,30 +1,32 @@
 import { useCallback, useEffect, useState } from "react";
-import { QuestionCard } from "./QuestionCard";
-import { useAppContext } from "./hooks/useAppContext";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../hooks/useAppContext";
+import { Answer } from "../models/Answer";
+import { IAnswer } from "../interfaces/IAnswer";
+import { QuestionCard } from "../QuestionCard";
 
 export const QuestionPage = () => {
   const {
     questions,
     currentQuestionNumber,
     setCurrentQuestionNumber,
-    answers,
-    currentScore,
-    setCurrentScore,
-    setAnswers,
+    currentPlayer,
+    setCurrentPlayer,
   } = useAppContext();
   const [counter, setCounter] = useState(10);
   const navigate = useNavigate();
 
   const registerEmptyAnswer = useCallback(() => {
-    setAnswers([
-      ...answers,
-      {
-        questionId: questions[currentQuestionNumber].id,
-        answer: "",
-      },
-    ]);
-  }, [answers, setAnswers, questions, currentQuestionNumber]);
+    const updatedAnswers: IAnswer[] = [
+      ...currentPlayer.answers,
+      new Answer(questions[currentQuestionNumber].id, ""),
+    ];
+
+    setCurrentPlayer({
+      ...currentPlayer,
+      answers: updatedAnswers,
+    });
+  }, [currentPlayer, setCurrentPlayer, questions, currentQuestionNumber]);
 
   const triggerNextQuestionWhenNoAnswer = useCallback(() => {
     setCurrentQuestionNumber(currentQuestionNumber + 1);
@@ -54,10 +56,7 @@ export const QuestionPage = () => {
     counter,
     setCurrentQuestionNumber,
     currentQuestionNumber,
-    answers,
-    currentScore,
     questions,
-    setCurrentScore,
     navigate,
     triggerNextQuestionWhenNoAnswer,
     registerEmptyAnswer,
@@ -83,7 +82,7 @@ export const QuestionPage = () => {
           ></QuestionCard>
         </div>
       ) : (
-        <div>Fel</div>
+        <div>Något fel inträffade vid hämtning av frågor!</div>
       )}
     </>
   );
