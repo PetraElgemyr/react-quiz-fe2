@@ -10,6 +10,9 @@ export type AppState = {
 
   currentPlayer: Player;
   setCurrentPlayer: React.Dispatch<React.SetStateAction<Player>>;
+
+  players: Player[];
+  setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
 };
 
 export const AppContext = createContext<AppState>({} as AppState);
