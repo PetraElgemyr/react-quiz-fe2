@@ -11,6 +11,18 @@ function App() {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState<number>(0);
   const [currentPlayer, setCurrentPlayer] =
     useState<Player>(defaultEmptyPlayer);
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  const initializePlayersToLS = () => {
+    const playersFromLs = localStorage.getItem("players");
+
+    if (!playersFromLs) {
+      localStorage.setItem("players", "[]");
+      setPlayers([]);
+    }
+
+    setPlayers(JSON.parse(playersFromLs ?? "[]"));
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -23,6 +35,7 @@ function App() {
     };
 
     getData();
+    initializePlayersToLS();
   }, []);
 
   const contextValue = {
@@ -32,6 +45,8 @@ function App() {
     currentQuestionNumber,
     currentPlayer,
     setCurrentPlayer,
+    players,
+    setPlayers,
   };
   return (
     <>
