@@ -1,32 +1,34 @@
 import { useCallback, useEffect, useState } from "react";
-import { QuestionCard } from "./QuestionCard";
-import { useAppContext } from "./hooks/useAppContext";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../hooks/useAppContext";
+import { Answer } from "../models/Answer";
+import { IAnswer } from "../interfaces/IAnswer";
+import { QuestionCard } from "../QuestionCard";
 
 export const QuestionPage = () => {
   const {
     questions,
     currentQuestionNumber,
     setCurrentQuestionNumber,
-    answers,
-    currentScore,
-    setCurrentScore,
-    setAnswers,
+    currentPlayer,
+    setCurrentPlayer,
   } = useAppContext();
   const [counter, setCounter] = useState(10);
   const navigate = useNavigate();
 
   const registerEmptyAnswer = useCallback(() => {
-    setAnswers([
-      ...answers,
-      {
-        questionId: questions[currentQuestionNumber].id,
-        answer: "",
-      },
-    ]);
-  }, [answers, setAnswers, questions, currentQuestionNumber]);
+    const updatedAnswers: IAnswer[] = [
+      ...currentPlayer.answers,
+      new Answer(questions[currentQuestionNumber].id, ""),
+    ];
 
-  const triggerNextQuestionWhenNoAnswer = useCallback(() => {
+    setCurrentPlayer({
+      ...currentPlayer,
+      answers: updatedAnswers,
+    });
+  }, [currentPlayer, setCurrentPlayer, questions, currentQuestionNumber]);
+
+  const triggerNextQuestion = useCallback(() => {
     setCurrentQuestionNumber(currentQuestionNumber + 1);
     setCounter(10);
   }, [currentQuestionNumber, setCurrentQuestionNumber, setCounter]);
@@ -42,7 +44,7 @@ export const QuestionPage = () => {
 
     if (counter === 0) {
       registerEmptyAnswer();
-      triggerNextQuestionWhenNoAnswer();
+      triggerNextQuestion();
 
       if (currentQuestionNumber === questions.length - 1) {
         triggerResultPage();
@@ -54,12 +56,9 @@ export const QuestionPage = () => {
     counter,
     setCurrentQuestionNumber,
     currentQuestionNumber,
-    answers,
-    currentScore,
     questions,
-    setCurrentScore,
     navigate,
-    triggerNextQuestionWhenNoAnswer,
+    triggerNextQuestion,
     registerEmptyAnswer,
     triggerResultPage,
   ]);
@@ -74,16 +73,16 @@ export const QuestionPage = () => {
             triggerNewQuestion={() => {
               if (currentQuestionNumber === questions.length - 1) {
                 triggerResultPage();
+                return;
               }
-              setCurrentQuestionNumber(currentQuestionNumber + 1);
-              setCounter(10);
+              triggerNextQuestion();
             }}
             key={questions[currentQuestionNumber].id}
             question={questions[currentQuestionNumber]}
           ></QuestionCard>
         </div>
       ) : (
-        <div>Fel</div>
+        <div>Något fel inträffade vid hämtning av frågor!</div>
       )}
     </>
   );
