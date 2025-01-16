@@ -13,7 +13,7 @@ export const ResultPage = () => {
       localStorage.getItem("players") ?? "[]"
     );
 
-    if (storagePlayers) {
+    if (storagePlayers.length >= 1) {
       setPlayers(storagePlayers);
     }
   }, [currentPlayer, setPlayers]);

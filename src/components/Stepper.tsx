@@ -5,9 +5,11 @@ import { useAppContext } from "./hooks/useAppContext";
 interface IStepperProps {
   triggerNextQuestion: () => void;
   registerEmptyAnswer: () => void;
+  triggerResultPage: () => void;
 }
 
 export const Stepper = ({
+  triggerResultPage,
   triggerNextQuestion,
   registerEmptyAnswer,
 }: IStepperProps) => {
@@ -21,6 +23,11 @@ export const Stepper = ({
     ) {
       registerEmptyAnswer();
     }
+    if (currentQuestionNumber === questions.length - 1) {
+      triggerResultPage();
+      return;
+    }
+
     triggerNextQuestion();
   };
 

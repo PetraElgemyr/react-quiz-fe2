@@ -67,6 +67,7 @@ export const QuestionPage = () => {
   return (
     <>
       <Stepper
+        triggerResultPage={triggerResultPage}
         triggerNextQuestion={triggerNextQuestion}
         registerEmptyAnswer={registerEmptyAnswer}
       />
