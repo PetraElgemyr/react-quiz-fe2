@@ -5,6 +5,7 @@ import { Answer } from "../models/Answer";
 import { IAnswer } from "../interfaces/IAnswer";
 import { QuestionCard } from "../QuestionCard";
 import { Stepper } from "../Stepper";
+import { Player } from "../models/Player";
 
 export const QuestionPage = () => {
   const {
@@ -13,9 +14,24 @@ export const QuestionPage = () => {
     setCurrentQuestionNumber,
     currentPlayer,
     setCurrentPlayer,
+    setPlayers,
   } = useAppContext();
   const [counter, setCounter] = useState(10);
   const navigate = useNavigate();
+
+  const updateCurrentPlayerInLS = (updatedCurrentPlayer: Player) => {
+    const jsonPlayers: Player[] = JSON.parse(
+      localStorage.getItem("players") ?? "[]"
+    );
+
+    const currentPlayerIndex = jsonPlayers.findIndex(
+      (p) => p.id === updatedCurrentPlayer.id
+    );
+
+    jsonPlayers[currentPlayerIndex] = updatedCurrentPlayer;
+    localStorage.setItem("players", JSON.stringify(jsonPlayers));
+    setPlayers(jsonPlayers);
+  };
 
   const registerEmptyAnswer = useCallback(() => {
     const updatedAnswers: IAnswer[] = [
@@ -27,6 +43,11 @@ export const QuestionPage = () => {
       ...currentPlayer,
       answers: updatedAnswers,
     });
+
+    return {
+      ...currentPlayer,
+      answers: updatedAnswers,
+    };
   }, [currentPlayer, setCurrentPlayer, questions, currentQuestionNumber]);
 
   const triggerNextQuestion = useCallback(() => {
@@ -67,6 +88,7 @@ export const QuestionPage = () => {
   return (
     <>
       <Stepper
+        updateCurrentPlayerInLS={updateCurrentPlayerInLS}
         triggerResultPage={triggerResultPage}
         triggerNextQuestion={triggerNextQuestion}
         registerEmptyAnswer={registerEmptyAnswer}
@@ -76,6 +98,7 @@ export const QuestionPage = () => {
           <div>Tid kvar: {counter} sekunder</div>
 
           <QuestionCard
+            updateCurrentPlayerInLS={updateCurrentPlayerInLS}
             triggerNewQuestion={() => {
               if (currentQuestionNumber === questions.length - 1) {
                 triggerResultPage();

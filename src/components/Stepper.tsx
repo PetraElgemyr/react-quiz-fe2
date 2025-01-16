@@ -1,17 +1,20 @@
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { Button, MobileStepper } from "@mui/material";
 import { useAppContext } from "./hooks/useAppContext";
+import { Player } from "./models/Player";
 
 interface IStepperProps {
   triggerNextQuestion: () => void;
-  registerEmptyAnswer: () => void;
+  registerEmptyAnswer: () => Player;
   triggerResultPage: () => void;
+  updateCurrentPlayerInLS: (p: Player) => void;
 }
 
 export const Stepper = ({
   triggerResultPage,
   triggerNextQuestion,
   registerEmptyAnswer,
+  updateCurrentPlayerInLS,
 }: IStepperProps) => {
   const { questions, currentQuestionNumber, currentPlayer } = useAppContext();
 
@@ -21,7 +24,8 @@ export const Stepper = ({
         (a) => a.questionId === currentQuestionNumber + 1
       )?.answer
     ) {
-      registerEmptyAnswer();
+      const updatedCurrentPlayer = registerEmptyAnswer();
+      updateCurrentPlayerInLS(updatedCurrentPlayer);
     }
     if (currentQuestionNumber === questions.length - 1) {
       triggerResultPage();
