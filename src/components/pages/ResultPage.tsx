@@ -53,7 +53,7 @@ export const ResultPage = () => {
         </p>
       )}
       <Button onClick={clearPlayersFromLS}>Rensa rekord</Button>
-      <Button onClick={() => navigate("/start")}>Spela igen!</Button>
+      <Button onClick={() => navigate("/")}>Spela igen!</Button>
       <h4>Rekord</h4>
       {players.length > 0 &&
         players.map((p, i) => (
