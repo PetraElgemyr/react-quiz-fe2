@@ -4,6 +4,7 @@ import { useAppContext } from "../hooks/useAppContext";
 import { Answer } from "../models/Answer";
 import { IAnswer } from "../interfaces/IAnswer";
 import { QuestionCard } from "../QuestionCard";
+import { Stepper } from "../Stepper";
 
 export const QuestionPage = () => {
   const {
@@ -65,6 +66,10 @@ export const QuestionPage = () => {
 
   return (
     <>
+      <Stepper
+        triggerNextQuestion={triggerNextQuestion}
+        registerEmptyAnswer={registerEmptyAnswer}
+      />
       {currentQuestionNumber <= questions.length - 1 ? (
         <div>
           <div>Tid kvar: {counter} sekunder</div>
