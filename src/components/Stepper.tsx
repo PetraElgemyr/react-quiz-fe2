@@ -1,8 +1,24 @@
 {
-  /* <ul class="steps steps-vertical lg:steps-horizontal">
-  <li class="step step-primary">Register</li>
-  <li class="step step-primary">Choose plan</li>
-  <li class="step">Purchase</li>
-  <li class="step">Receive Product</li>
+  {
+    /* <ul className="steps steps-vertical lg:steps-horizontal">
+  <li className="step step-primary">Register</li>
+  <li className="step step-primary">Choose plan</li>
+  <li className="step">Purchase</li>
+  <li className="step">Receive Product</li>
 </ul> */
+  }
 }
+import "../scss/stepper.css";
+
+export const Stepper = () => {
+  return (
+    <>
+      <ul className="steps steps-vertical lg:steps-horizontal">
+        <li className="step step-primary">Register</li>
+        <li className="step step-primary">Choose plan</li>
+        <li className="step">Purchase</li>
+        <li className="step">Receive Product</li>
+      </ul>
+    </>
+  );
+};
