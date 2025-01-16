@@ -4,6 +4,8 @@ import { useAppContext } from "../hooks/useAppContext";
 import { Answer } from "../models/Answer";
 import { IAnswer } from "../interfaces/IAnswer";
 import { QuestionCard } from "../QuestionCard";
+import { Stepper } from "../Stepper";
+import { Player } from "../models/Player";
 
 export const QuestionPage = () => {
   const {
@@ -12,9 +14,27 @@ export const QuestionPage = () => {
     setCurrentQuestionNumber,
     currentPlayer,
     setCurrentPlayer,
+    setPlayers,
   } = useAppContext();
   const [counter, setCounter] = useState(10);
   const navigate = useNavigate();
+
+  const updateCurrentPlayerInLS = useCallback(
+    (updatedCurrentPlayer: Player) => {
+      const jsonPlayers: Player[] = JSON.parse(
+        localStorage.getItem("players") ?? "[]"
+      );
+
+      const currentPlayerIndex = jsonPlayers.findIndex(
+        (p) => p.id === updatedCurrentPlayer.id
+      );
+
+      jsonPlayers[currentPlayerIndex] = updatedCurrentPlayer;
+      localStorage.setItem("players", JSON.stringify(jsonPlayers));
+      setPlayers(jsonPlayers);
+    },
+    [setPlayers]
+  );
 
   const registerEmptyAnswer = useCallback(() => {
     const updatedAnswers: IAnswer[] = [
@@ -26,6 +46,11 @@ export const QuestionPage = () => {
       ...currentPlayer,
       answers: updatedAnswers,
     });
+
+    return {
+      ...currentPlayer,
+      answers: updatedAnswers,
+    };
   }, [currentPlayer, setCurrentPlayer, questions, currentQuestionNumber]);
 
   const triggerNextQuestion = useCallback(() => {
@@ -43,7 +68,9 @@ export const QuestionPage = () => {
     }, 1000);
 
     if (counter === 0) {
-      registerEmptyAnswer();
+      const updatedCurrentPlayer = registerEmptyAnswer();
+      updateCurrentPlayerInLS(updatedCurrentPlayer);
+
       triggerNextQuestion();
 
       if (currentQuestionNumber === questions.length - 1) {
@@ -61,15 +88,23 @@ export const QuestionPage = () => {
     triggerNextQuestion,
     registerEmptyAnswer,
     triggerResultPage,
+    updateCurrentPlayerInLS,
   ]);
 
   return (
     <>
+      <Stepper
+        updateCurrentPlayerInLS={updateCurrentPlayerInLS}
+        triggerResultPage={triggerResultPage}
+        triggerNextQuestion={triggerNextQuestion}
+        registerEmptyAnswer={registerEmptyAnswer}
+      />
       {currentQuestionNumber <= questions.length - 1 ? (
         <div>
           <div>Tid kvar: {counter} sekunder</div>
 
           <QuestionCard
+            updateCurrentPlayerInLS={updateCurrentPlayerInLS}
             triggerNewQuestion={() => {
               if (currentQuestionNumber === questions.length - 1) {
                 triggerResultPage();
