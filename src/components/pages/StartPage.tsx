@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { useAppContext } from "../hooks/useAppContext";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { Player } from "../models/Player";
+import { v4 as uuidv4 } from "uuid";
 
 export const StartPage = () => {
   const navigate = useNavigate();
-  const { currentPlayer, setCurrentPlayer } = useAppContext();
+  const { currentPlayer, setCurrentPlayer, setCurrentQuestionNumber } =
+    useAppContext();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentPlayer({ ...currentPlayer, name: e.target.value });
@@ -23,8 +25,16 @@ export const StartPage = () => {
     }
   };
 
+  useEffect(() => {
+    setCurrentQuestionNumber(0);
+    setCurrentPlayer(new Player(uuidv4().toString(), "", 0, []));
+  }, [setCurrentQuestionNumber, setCurrentPlayer]);
+
   return (
     <>
+      <h1>Quizdags!</h1>
+      <h3>Är du smartaren än en ph-deltagare? Dags att ta reda på det!</h3>
+
       <h3>Ange namn:</h3>
       <TextField
         id="outlined-basic"

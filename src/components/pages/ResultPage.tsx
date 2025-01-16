@@ -4,9 +4,11 @@ import { useAppContext } from "../hooks/useAppContext";
 import { IQuestion } from "../interfaces/IQuestion";
 import { Button } from "@mui/material";
 import { Player } from "../models/Player";
+import { useNavigate } from "react-router-dom";
 
 export const ResultPage = () => {
   const { questions, currentPlayer, players, setPlayers } = useAppContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storagePlayers: Player[] = JSON.parse(
@@ -51,6 +53,7 @@ export const ResultPage = () => {
         </p>
       )}
       <Button onClick={clearPlayersFromLS}>Rensa rekord</Button>
+      <Button onClick={() => navigate("/")}>Spela igen!</Button>
       <h4>Rekord</h4>
       {players.length > 0 &&
         players.map((p, i) => (
