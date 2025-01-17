@@ -65,7 +65,10 @@ export const QuestionCard = ({
 
   return (
     <>
-      <Card key={`q-${question.id}-${question.answer}`}>
+      <Card
+        key={`q-${question.id}-${question.answer}`}
+        sx={{ backgroundColor: "#e1bed04a" }}
+      >
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Fråga {question.id}
