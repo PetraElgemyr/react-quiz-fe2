@@ -1,0 +1,42 @@
+// .MuiMobileStepper-dots {
+//     .MuiMobileStepper-dot {
+//         background-color: "gray",
+//     }
+
+//     .MuiMobileStepper-dot.MuiMobileStepper-dotActive {
+//         background-color: "black", // Ändra prickens färg för aktiv steg
+//     }
+// }
+
+
+// color: "black",
+//           width: "85%",
+//           backgroundColor: "#e1bed04a",
+//           borderRadius: "3px",
+//           justifyContent: "center",
+//           gap: "20px",
+
+.MuiMobileStepper-root {
+    width: 85%;
+    color: black;
+    background: none;
+    background-color: #e1bed04a;
+    border-radius: 3px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.MuiMobileStepper-dots {
+    .MuiMobileStepper-dot {
+        background-color: gray; // Standardfärg för prickarna
+
+        &.MuiMobileStepper-dotActive {
+            background-color: black; // Färg för aktiv prick
+        }
+    }
+}
+
+.btn-back-placeholder {
+    width: 15%;
+}
+

@@ -1,0 +1,7 @@
+@use "mixins" as m;
+
+.container {
+    width: 100%;
+    @include m.centering-col;
+    margin: 0;
+}
