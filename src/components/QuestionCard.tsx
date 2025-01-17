@@ -1,7 +1,9 @@
+import Card from "@mui/material/Card";
 import { useAppContext } from "./hooks/useAppContext";
 import { IAnswer } from "./interfaces/IAnswer";
 import { IQuestion } from "./interfaces/IQuestion";
 import { Player } from "./models/Player";
+import { CardActionArea, CardContent, Typography } from "@mui/material";
 
 interface IQuestionCardProps {
   question: IQuestion;
@@ -63,18 +65,32 @@ export const QuestionCard = ({
 
   return (
     <>
-      <p>{question.question}</p>
+      <Card key={`q-${question.id}-${question.answer}`}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Fråga {question.id}
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {question.question}
+          </Typography>
+        </CardContent>
 
-      {question.options.map((opt, i) => (
-        <button
-          key={i}
-          onClick={() => {
-            registerAnswer(opt);
-          }}
-        >
-          {opt}
-        </button>
-      ))}
+        {question.options.map((opt, i) => (
+          <>
+            <Card key={`${opt}-ind-${i}`}>
+              <CardActionArea
+                onClick={() => {
+                  registerAnswer(opt);
+                }}
+              >
+                <CardContent>
+                  <Typography variant="body1">{opt}</Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </>
+        ))}
+      </Card>
     </>
   );
 };
