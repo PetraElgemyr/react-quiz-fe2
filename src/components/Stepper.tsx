@@ -1,7 +1,8 @@
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import { KeyboardArrowRight } from "@mui/icons-material";
 import { Button, MobileStepper } from "@mui/material";
 import { useAppContext } from "./hooks/useAppContext";
 import { Player } from "./models/Player";
+import "./scss/stepper.scss";
 
 interface IStepperProps {
   triggerNextQuestion: () => void;
@@ -42,10 +43,11 @@ export const Stepper = ({
         steps={questions.length}
         position="static"
         activeStep={currentQuestionNumber}
-        sx={{ maxWidth: 400, flexGrow: 1 }}
+        sx={{}}
         nextButton={
           <Button
             size="small"
+            sx={{ color: "black" }}
             onClick={checkIfPickedAnswer}
             disabled={currentQuestionNumber === questions.length}
           >
@@ -53,12 +55,7 @@ export const Stepper = ({
             <KeyboardArrowRight />
           </Button>
         }
-        backButton={
-          <Button size="small" onClick={() => {}} disabled={true}>
-            <KeyboardArrowLeft />
-            Back
-          </Button>
-        }
+        backButton={<div className="btn-back-placeholder"></div>}
       />
     </>
   );

@@ -67,7 +67,7 @@ export const QuestionCard = ({
     <>
       <Card
         key={`q-${question.id}-${question.answer}`}
-        sx={{ backgroundColor: "#e1bed04a" }}
+        sx={{ backgroundColor: "#e1bed04a", width: "85%" }}
       >
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -80,7 +80,10 @@ export const QuestionCard = ({
 
         {question.options.map((opt, i) => (
           <>
-            <Card key={`${opt}-ind-${i}`}>
+            <Card
+              key={`${opt}-ind-${i}`}
+              sx={{ margin: "5% 10%", textAlign: "center" }}
+            >
               <CardActionArea
                 onClick={() => {
                   registerAnswer(opt);
