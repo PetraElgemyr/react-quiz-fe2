@@ -99,23 +99,27 @@ export const QuestionPage = () => {
         triggerNextQuestion={triggerNextQuestion}
         registerEmptyAnswer={registerEmptyAnswer}
       />
-      {currentQuestionNumber <= questions.length - 1 ? (
-        <div>
-          <div>Tid kvar: {counter} sekunder</div>
+      <div>Tid kvar: {counter} sekunder</div>
 
-          <QuestionCard
-            updateCurrentPlayerInLS={updateCurrentPlayerInLS}
-            triggerNewQuestion={() => {
-              if (currentQuestionNumber === questions.length - 1) {
-                triggerResultPage();
-                return;
-              }
-              triggerNextQuestion();
-            }}
-            key={questions[currentQuestionNumber].id}
-            question={questions[currentQuestionNumber]}
-          ></QuestionCard>
-        </div>
+      {currentQuestionNumber <= questions.length - 1 ? (
+        questions.map((q, i) => {
+          if (i === currentQuestionNumber) {
+            return (
+              <QuestionCard
+                key={`${q.id}-${i}`}
+                updateCurrentPlayerInLS={updateCurrentPlayerInLS}
+                triggerNewQuestion={() => {
+                  if (currentQuestionNumber === questions.length - 1) {
+                    triggerResultPage();
+                    return;
+                  }
+                  triggerNextQuestion();
+                }}
+                question={questions[currentQuestionNumber]}
+              ></QuestionCard>
+            );
+          }
+        })
       ) : (
         <div>Något fel inträffade vid hämtning av frågor!</div>
       )}
