@@ -65,7 +65,7 @@ export const QuestionPage = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      // setCounter((previousSec) => (previousSec > 0 ? previousSec - 1 : 0));
+      setCounter((previousSec) => (previousSec > 0 ? previousSec - 1 : 0));
     }, 1000);
 
     if (counter === 0) {
