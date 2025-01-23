@@ -10,19 +10,8 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import { Breakpoints } from "../styled/Variables/Breakpoints";
-
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      xs: Breakpoints.miniMobileBreakpoint,
-      sm: Breakpoints.tabletBreakpoint,
-      md: Breakpoints.laptopBreakpoint,
-      lg: Breakpoints.desktopBreakpoint,
-      xl: Breakpoints.fourKBreakpoint,
-    },
-  },
-});
+import { Colors } from "../styled/Variables/Colors";
+import { breakpointTheme } from "../themes/themes";
 
 const optionCardTheme = createTheme({
   components: {
@@ -103,11 +92,11 @@ export const QuestionCard = ({
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={breakpointTheme}>
         <Card
           key={`q-${question.id}-${question.answer}`}
           sx={{
-            backgroundColor: "#e1bed04a",
+            backgroundColor: Colors.primaryFrostyWhite,
             padding: {
               xxs: "10%",
               xs: "8%",
@@ -121,10 +110,10 @@ export const QuestionCard = ({
             gap: "20px",
             width: {
               xxs: "90%",
-              xs: "80%",
+              xs: "90%",
               sm: "60%",
               md: "40%",
-              xl: "30%",
+              lg: "30%",
             },
             boxShadow: "5px 5px 10px 1px rgba(59, 47, 47, 0.7)",
           }}
