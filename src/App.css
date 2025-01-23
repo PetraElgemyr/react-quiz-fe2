@@ -1,0 +1,10 @@
+html,
+body {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #BE418D, #BE7241);
+}
+
+* {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}

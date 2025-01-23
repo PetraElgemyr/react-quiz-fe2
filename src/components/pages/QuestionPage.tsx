@@ -6,6 +6,7 @@ import { IAnswer } from "../interfaces/IAnswer";
 import { QuestionCard } from "../QuestionCard";
 import { Stepper } from "../Stepper";
 import { Player } from "../models/Player";
+import "../scss/questionPage.scss";
 
 export const QuestionPage = () => {
   const {
@@ -92,33 +93,37 @@ export const QuestionPage = () => {
   ]);
 
   return (
-    <>
+    <div className="container">
       <Stepper
         updateCurrentPlayerInLS={updateCurrentPlayerInLS}
         triggerResultPage={triggerResultPage}
         triggerNextQuestion={triggerNextQuestion}
         registerEmptyAnswer={registerEmptyAnswer}
       />
-      {currentQuestionNumber <= questions.length - 1 ? (
-        <div>
-          <div>Tid kvar: {counter} sekunder</div>
+      <p className="time-text">Tid kvar: {counter} sekunder ⏳</p>
 
-          <QuestionCard
-            updateCurrentPlayerInLS={updateCurrentPlayerInLS}
-            triggerNewQuestion={() => {
-              if (currentQuestionNumber === questions.length - 1) {
-                triggerResultPage();
-                return;
-              }
-              triggerNextQuestion();
-            }}
-            key={questions[currentQuestionNumber].id}
-            question={questions[currentQuestionNumber]}
-          ></QuestionCard>
-        </div>
+      {currentQuestionNumber <= questions.length - 1 ? (
+        questions.map((q, i) => {
+          if (i === currentQuestionNumber) {
+            return (
+              <QuestionCard
+                key={`${q.id}-${i}`}
+                updateCurrentPlayerInLS={updateCurrentPlayerInLS}
+                triggerNewQuestion={() => {
+                  if (currentQuestionNumber === questions.length - 1) {
+                    triggerResultPage();
+                    return;
+                  }
+                  triggerNextQuestion();
+                }}
+                question={questions[currentQuestionNumber]}
+              ></QuestionCard>
+            );
+          }
+        })
       ) : (
         <div>Något fel inträffade vid hämtning av frågor!</div>
       )}
-    </>
+    </div>
   );
 };

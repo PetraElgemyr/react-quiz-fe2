@@ -1,0 +1,23 @@
+@use "mixins" as m;
+@use "variables" as v;
+
+.container {
+    width: 100%;
+    @include m.centering-col;
+    margin: 0;
+    padding: 5%;
+}
+
+.time-text {
+    padding: 2%;
+    font-size: 1.1rem;
+
+    @media (min-width: v.$tablet) {
+        padding: 1%;
+        font-size: 1.2rem;
+    }
+
+    @media (min-width: v.$desktop) {
+        font-size: 1.4rem;
+    }
+}
