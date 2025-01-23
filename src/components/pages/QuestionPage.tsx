@@ -100,7 +100,7 @@ export const QuestionPage = () => {
         triggerNextQuestion={triggerNextQuestion}
         registerEmptyAnswer={registerEmptyAnswer}
       />
-      <div>Tid kvar: {counter} sekunder</div>
+      <p className="time-text">Tid kvar: {counter} sekunder ⏳</p>
 
       {currentQuestionNumber <= questions.length - 1 ? (
         questions.map((q, i) => {
