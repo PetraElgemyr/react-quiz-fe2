@@ -3,7 +3,45 @@ import { useAppContext } from "./hooks/useAppContext";
 import { IAnswer } from "./interfaces/IAnswer";
 import { IQuestion } from "./interfaces/IQuestion";
 import { Player } from "./models/Player";
-import { CardActionArea, CardContent, Typography } from "@mui/material";
+import {
+  CardActionArea,
+  CardContent,
+  createTheme,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
+import { Breakpoints } from "../styled/Variables/Breakpoints";
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: Breakpoints.miniMobileBreakpoint,
+      sm: Breakpoints.tabletBreakpoint,
+      md: Breakpoints.laptopBreakpoint,
+      lg: Breakpoints.desktopBreakpoint,
+      xl: Breakpoints.fourKBreakpoint,
+    },
+  },
+});
+
+const optionCardTheme = createTheme({
+  components: {
+    MuiCard: {
+      defaultProps: {
+        sx: {
+          textAlign: "center",
+          margin: 0,
+          padding: 0,
+          backgroundColor: "#eee0e49c",
+
+          ":hover": {
+            boxShadow: "inset 0 0 8px rgb(46, 45, 45)",
+          },
+        },
+      },
+    },
+  },
+});
 
 interface IQuestionCardProps {
   question: IQuestion;
@@ -65,38 +103,58 @@ export const QuestionCard = ({
 
   return (
     <>
-      <Card
-        key={`q-${question.id}-${question.answer}`}
-        sx={{ backgroundColor: "#e1bed04a", width: "85%" }}
-      >
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Fråga {question.id}
-          </Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            {question.question}
-          </Typography>
-        </CardContent>
+      <ThemeProvider theme={theme}>
+        <Card
+          key={`q-${question.id}-${question.answer}`}
+          sx={{
+            backgroundColor: "#e1bed04a",
+            padding: {
+              xxs: "10%",
+              xs: "8%",
+              sm: "6%",
+              md: "5%",
+              lg: "4%",
+              xl: "3%",
+            },
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            width: {
+              xxs: "90%",
+              xs: "80%",
+              sm: "60%",
+              md: "40%",
+              xl: "30%",
+            },
+            boxShadow: "5px 5px 10px 1px rgba(59, 47, 47, 0.7)",
+          }}
+        >
+          <CardContent sx={{ margin: 0, padding: 0 }}>
+            <Typography gutterBottom variant="h5" component="div">
+              Fråga {question.id}
+            </Typography>
+            <Typography variant="body2" color="black">
+              {question.question}
+            </Typography>
+          </CardContent>
 
-        {question.options.map((opt, i) => (
-          <>
-            <Card
-              key={`${opt}-ind-${i}`}
-              sx={{ margin: "5% 10%", textAlign: "center" }}
-            >
-              <CardActionArea
-                onClick={() => {
-                  registerAnswer(opt);
-                }}
-              >
-                <CardContent>
-                  <Typography variant="body1">{opt}</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </>
-        ))}
-      </Card>
+          {question.options.map((opt, i) => (
+            <ThemeProvider theme={optionCardTheme}>
+              <Card key={`${opt}-ind-${i}`}>
+                <CardActionArea
+                  onClick={() => {
+                    registerAnswer(opt);
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="body1">{opt}</Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </ThemeProvider>
+          ))}
+        </Card>
+      </ThemeProvider>
     </>
   );
 };
