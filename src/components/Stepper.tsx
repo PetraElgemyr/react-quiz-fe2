@@ -7,9 +7,7 @@ import {
 } from "@mui/material";
 import { useAppContext } from "./hooks/useAppContext";
 import { Player } from "./models/Player";
-// import "./scss/stepper.scss";
 import { Colors } from "../styled/Variables/Colors";
-import { breakpointTheme } from "../themes/themes";
 
 const stepperTheme = createTheme({
   components: {
@@ -22,6 +20,7 @@ const stepperTheme = createTheme({
           backgroundColor: "black",
         },
         root: {
+          margin: 0,
           color: "black",
           borderRadius: "3px",
           justifyContent: "space-between",
@@ -67,40 +66,37 @@ export const Stepper = ({
 
   return (
     <>
-      <ThemeProvider theme={breakpointTheme}>
-        <ThemeProvider theme={stepperTheme}>
-          <MobileStepper
-            variant="dots"
-            steps={questions.length}
-            position="static"
-            activeStep={currentQuestionNumber}
-            sx={{
-              width: {
-                xxs: "90%",
-                xs: "90%",
-                sm: "60%",
-                md: "40%",
-                lg: "30%",
-              },
-            }}
-            nextButton={
-              <Button
-                size="small"
-                sx={{ color: "black" }}
-                onClick={checkIfPickedAnswer}
-                disabled={currentQuestionNumber === questions.length}
-              >
-                {currentQuestionNumber < questions.length - 1
-                  ? "Nästa"
-                  : "Klar"}
-                <KeyboardArrowRight />
-              </Button>
-            }
-            backButton={
-              <Button size="small" sx={{ visibility: "hidden" }}></Button>
-            }
-          />
-        </ThemeProvider>
+      <ThemeProvider theme={stepperTheme}>
+        <MobileStepper
+          variant="dots"
+          steps={questions.length}
+          position="static"
+          activeStep={currentQuestionNumber}
+          sx={{
+            width: {
+              xxs: "90%",
+              xs: "90%",
+              sm: "60%",
+              md: "40%",
+              lg: "30%",
+              xl: "30%",
+            },
+          }}
+          nextButton={
+            <Button
+              size="small"
+              sx={{ color: "black" }}
+              onClick={checkIfPickedAnswer}
+              disabled={currentQuestionNumber === questions.length}
+            >
+              {currentQuestionNumber < questions.length - 1 ? "Nästa" : "Klar"}
+              <KeyboardArrowRight />
+            </Button>
+          }
+          backButton={
+            <Button size="small" sx={{ visibility: "hidden" }}></Button>
+          }
+        />
       </ThemeProvider>
     </>
   );

@@ -11,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Colors } from "../styled/Variables/Colors";
-import { breakpointTheme } from "../themes/themes";
 
 const optionCardTheme = createTheme({
   components: {
@@ -92,58 +91,57 @@ export const QuestionCard = ({
 
   return (
     <>
-      <ThemeProvider theme={breakpointTheme}>
-        <Card
-          key={`q-${question.id}-${question.answer}`}
-          sx={{
-            backgroundColor: Colors.primaryFrostyWhite,
-            padding: {
-              xxs: "10%",
-              xs: "8%",
-              sm: "6%",
-              md: "5%",
-              lg: "4%",
-              xl: "3%",
-            },
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            width: {
-              xxs: "90%",
-              xs: "90%",
-              sm: "60%",
-              md: "40%",
-              lg: "30%",
-            },
-            boxShadow: "5px 5px 10px 1px rgba(59, 47, 47, 0.7)",
-          }}
-        >
-          <CardContent sx={{ margin: 0, padding: 0 }}>
-            <Typography gutterBottom variant="h5" component="div">
-              Fråga {question.id}
-            </Typography>
-            <Typography variant="body2" color="black">
-              {question.question}
-            </Typography>
-          </CardContent>
+      <Card
+        key={`q-${question.id}-${question.answer}`}
+        sx={{
+          backgroundColor: Colors.primaryFrostyWhite,
+          padding: {
+            xxs: "10%",
+            xs: "8%",
+            sm: "6%",
+            md: "5%",
+            lg: "4%",
+            xl: "3%",
+          },
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          width: {
+            xxs: "90%",
+            xs: "90%",
+            sm: "60%",
+            md: "40%",
+            lg: "30%",
+            xl: "30%",
+          },
+          boxShadow: "5px 5px 10px 1px rgba(59, 47, 47, 0.7)",
+        }}
+      >
+        <CardContent sx={{ margin: 0, padding: 0 }}>
+          <Typography gutterBottom variant="h5" component="div">
+            Fråga {question.id}
+          </Typography>
+          <Typography variant="body2" color="black">
+            {question.question}
+          </Typography>
+        </CardContent>
 
-          {question.options.map((opt, i) => (
-            <ThemeProvider theme={optionCardTheme}>
-              <Card key={`${opt}-ind-${i}`}>
-                <CardActionArea
-                  onClick={() => {
-                    registerAnswer(opt);
-                  }}
-                >
-                  <CardContent>
-                    <Typography variant="body1">{opt}</Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </ThemeProvider>
-          ))}
-        </Card>
-      </ThemeProvider>
+        {question.options.map((opt, i) => (
+          <ThemeProvider theme={optionCardTheme}>
+            <Card key={`${opt}-ind-${i}`}>
+              <CardActionArea
+                onClick={() => {
+                  registerAnswer(opt);
+                }}
+              >
+                <CardContent>
+                  <Typography variant="body1">{opt}</Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </ThemeProvider>
+        ))}
+      </Card>
     </>
   );
 };
