@@ -18,6 +18,8 @@ export const QuestionPage = () => {
   const [counter, setCounter] = useState(10);
   const [showNextButton, setShowNextButton] = useState<boolean>(false);
   const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
+  const [selectedOpt, setSelectedOpt] = useState<string>("");
   const navigate = useNavigate();
 
   const updateCurrentPlayerInLS = useCallback(
@@ -44,8 +46,11 @@ export const QuestionPage = () => {
   const triggerNextQuestion = useCallback(() => {
     if (currentQuestionNumber === questions.length - 1) {
       triggerResultPage();
+      return;
     }
 
+    setShowCorrectAnswer(false);
+    setIsTimerPaused(false);
     setCurrentQuestionNumber(currentQuestionNumber + 1);
     setCounter(10);
   }, [
@@ -55,15 +60,6 @@ export const QuestionPage = () => {
     triggerResultPage,
     questions,
   ]);
-
-  const revealCorrentAnswer = useCallback(() => {
-    const answer = questions.find(
-      (q) => q.id === currentQuestionNumber + 1
-    )?.answer;
-    console.log("rätt svar till frågan är: ", answer);
-
-    return answer;
-  }, [questions, currentQuestionNumber]);
 
   useEffect(() => {
     if (isTimerPaused) return;
@@ -75,11 +71,11 @@ export const QuestionPage = () => {
     if (counter === 0) {
       setIsTimerPaused(true);
       setShowNextButton(true);
-      revealCorrentAnswer();
+      setShowCorrectAnswer(true);
     }
 
     return () => clearInterval(timer);
-  }, [counter, revealCorrentAnswer, isTimerPaused]);
+  }, [counter, isTimerPaused]);
 
   useEffect(() => {
     setIsTimerPaused(false);
@@ -96,10 +92,6 @@ export const QuestionPage = () => {
                 key={`${q.id}-${i}`}
                 updateCurrentPlayerInLS={updateCurrentPlayerInLS}
                 triggerNewQuestion={() => {
-                  if (currentQuestionNumber === questions.length - 1) {
-                    triggerResultPage();
-                    return;
-                  }
                   triggerNextQuestion();
                 }}
                 question={questions[currentQuestionNumber]}
@@ -108,6 +100,12 @@ export const QuestionPage = () => {
                   setIsTimerPaused(true);
                 }}
                 isTimerPaused={isTimerPaused}
+                showCorrectAnswer={showCorrectAnswer}
+                setShowCorrectAnswer={(val: boolean) =>
+                  setShowCorrectAnswer(val)
+                }
+                selectedOpt={selectedOpt}
+                setSelectedOpt={(opt: string) => setSelectedOpt(opt)}
               ></QuestionCard>
             );
           }

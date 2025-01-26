@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import { Colors } from "../styled/Variables/Colors";
 import { Stepper } from "./Stepper";
-import { useState } from "react";
 
 const optionCardTheme = createTheme({
   components: {
@@ -38,6 +37,10 @@ interface IQuestionCardProps {
   updateCurrentPlayerInLS: (p: Player) => void;
   registerClickedAnswer: () => void;
   isTimerPaused: boolean;
+  showCorrectAnswer: boolean;
+  setShowCorrectAnswer: (val: boolean) => void;
+  selectedOpt: string;
+  setSelectedOpt: (opt: string) => void;
 }
 
 export const QuestionCard = ({
@@ -45,10 +48,12 @@ export const QuestionCard = ({
   updateCurrentPlayerInLS,
   registerClickedAnswer,
   isTimerPaused,
+  showCorrectAnswer,
+  setShowCorrectAnswer,
+  selectedOpt,
+  setSelectedOpt,
 }: IQuestionCardProps) => {
   const { questions, currentPlayer, setCurrentPlayer } = useAppContext();
-  const [selectedOpt, setSelectedOpt] = useState<string>("");
-  const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
   const updateScoreForCurrentPlayer = (currentNewAnswers: Player) => {
     let scores = 0;
     questions.forEach((q, index) => {
@@ -163,7 +168,6 @@ export const QuestionCard = ({
             </Card>
           </ThemeProvider>
         ))}
-
         <Stepper />
       </Card>
     </>
