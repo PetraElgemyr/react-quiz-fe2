@@ -1,20 +1,14 @@
-import { KeyboardArrowRight } from "@mui/icons-material";
-import {
-  Button,
-  createTheme,
-  MobileStepper,
-  ThemeProvider,
-} from "@mui/material";
+import { createTheme, MobileStepper, ThemeProvider } from "@mui/material";
 import { useAppContext } from "./hooks/useAppContext";
-import { Player } from "./models/Player";
 import { Colors } from "../styled/Variables/Colors";
 
 const stepperTheme = createTheme({
   components: {
     MuiMobileStepper: {
       styleOverrides: {
+        dots: { width: "100%", display: "flex", justifyContent: "center" },
         dot: {
-          backgroundColor: "#eee0e49c",
+          backgroundColor: Colors.backgroundWhite,
         },
         dotActive: {
           backgroundColor: "black",
@@ -24,45 +18,16 @@ const stepperTheme = createTheme({
           color: "black",
           borderRadius: "3px",
           justifyContent: "space-between",
-          background: Colors.primaryGold,
-          boxShadow: "2px 2px 10px 1px rgba(59, 47, 47, 0.7) ",
+          backgroundColor: "transparent",
+          padding: "3%",
         },
       },
     },
   },
 });
 
-interface IStepperProps {
-  triggerNextQuestion: () => void;
-  registerEmptyAnswer: () => Player;
-  triggerResultPage: () => void;
-  updateCurrentPlayerInLS: (p: Player) => void;
-}
-
-export const Stepper = ({
-  triggerResultPage,
-  triggerNextQuestion,
-  registerEmptyAnswer,
-  updateCurrentPlayerInLS,
-}: IStepperProps) => {
-  const { questions, currentQuestionNumber, currentPlayer } = useAppContext();
-
-  const checkIfPickedAnswer = () => {
-    if (
-      !currentPlayer.answers.find(
-        (a) => a.questionId === currentQuestionNumber + 1
-      )?.answer
-    ) {
-      const updatedCurrentPlayer = registerEmptyAnswer();
-      updateCurrentPlayerInLS(updatedCurrentPlayer);
-    }
-    if (currentQuestionNumber === questions.length - 1) {
-      triggerResultPage();
-      return;
-    }
-
-    triggerNextQuestion();
-  };
+export const Stepper = () => {
+  const { questions, currentQuestionNumber } = useAppContext();
 
   return (
     <>
@@ -73,29 +38,10 @@ export const Stepper = ({
           position="static"
           activeStep={currentQuestionNumber}
           sx={{
-            width: {
-              xxs: "90%",
-              xs: "90%",
-              sm: "60%",
-              md: "40%",
-              lg: "30%",
-              xl: "30%",
-            },
+            width: "100%",
           }}
-          nextButton={
-            <Button
-              size="small"
-              sx={{ color: "black" }}
-              onClick={checkIfPickedAnswer}
-              disabled={currentQuestionNumber === questions.length}
-            >
-              {currentQuestionNumber < questions.length - 1 ? "Nästa" : "Klar"}
-              <KeyboardArrowRight />
-            </Button>
-          }
-          backButton={
-            <Button size="small" sx={{ visibility: "hidden" }}></Button>
-          }
+          nextButton={<></>}
+          backButton={<></>}
         />
       </ThemeProvider>
     </>
