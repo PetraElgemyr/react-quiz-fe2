@@ -24,7 +24,7 @@ const stepperTheme = createTheme({
           color: "black",
           borderRadius: "3px",
           justifyContent: "space-between",
-          backgroundColor: Colors.primaryFrostyWhite,
+          background: Colors.primaryGold,
           boxShadow: "2px 2px 10px 1px rgba(59, 47, 47, 0.7) ",
         },
       },
