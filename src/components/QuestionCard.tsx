@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Colors } from "../styled/Variables/Colors";
+import { Stepper } from "./Stepper";
 
 const optionCardTheme = createTheme({
   components: {
@@ -20,7 +21,7 @@ const optionCardTheme = createTheme({
           textAlign: "center",
           margin: 0,
           padding: 0,
-          backgroundColor: "rgba(249, 249, 249, 0.71)",
+          backgroundColor: Colors.backgroundWhite,
           ":hover": {
             boxShadow: "inset 0 0 8px rgb(46, 45, 45)",
           },
@@ -140,6 +141,8 @@ export const QuestionCard = ({
             </Card>
           </ThemeProvider>
         ))}
+
+        <Stepper />
       </Card>
     </>
   );

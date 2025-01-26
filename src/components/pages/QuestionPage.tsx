@@ -4,7 +4,6 @@ import { useAppContext } from "../hooks/useAppContext";
 import { Answer } from "../models/Answer";
 import { IAnswer } from "../interfaces/IAnswer";
 import { QuestionCard } from "../QuestionCard";
-import { Stepper } from "../Stepper";
 import { Player } from "../models/Player";
 import "../scss/questionPage.scss";
 
@@ -65,7 +64,7 @@ export const QuestionPage = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCounter((previousSec) => (previousSec > 0 ? previousSec - 1 : 0));
+      // setCounter((previousSec) => (previousSec > 0 ? previousSec - 1 : 0));
     }, 1000);
 
     if (counter === 0) {
@@ -94,12 +93,6 @@ export const QuestionPage = () => {
 
   return (
     <div className="container">
-      <Stepper
-        updateCurrentPlayerInLS={updateCurrentPlayerInLS}
-        triggerResultPage={triggerResultPage}
-        triggerNextQuestion={triggerNextQuestion}
-        registerEmptyAnswer={registerEmptyAnswer}
-      />
       <p className="time-text">Tid kvar: {counter} sekunder ⏳</p>
 
       {currentQuestionNumber <= questions.length - 1 ? (
