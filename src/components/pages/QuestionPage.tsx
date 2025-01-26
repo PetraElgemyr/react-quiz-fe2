@@ -1,22 +1,25 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../hooks/useAppContext";
-import { Answer } from "../models/Answer";
-import { IAnswer } from "../interfaces/IAnswer";
 import { QuestionCard } from "../QuestionCard";
 import { Player } from "../models/Player";
 import "../scss/questionPage.scss";
+import Button from "@mui/material/Button";
+import { Colors } from "../../styled/Variables/Colors";
+import Box from "@mui/material/Box";
 
 export const QuestionPage = () => {
   const {
     questions,
     currentQuestionNumber,
     setCurrentQuestionNumber,
-    currentPlayer,
-    setCurrentPlayer,
     setPlayers,
   } = useAppContext();
   const [counter, setCounter] = useState(10);
+  const [showNextButton, setShowNextButton] = useState<boolean>(false);
+  const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
+  const [selectedOpt, setSelectedOpt] = useState<string>("");
   const navigate = useNavigate();
 
   const updateCurrentPlayerInLS = useCallback(
@@ -36,65 +39,51 @@ export const QuestionPage = () => {
     [setPlayers]
   );
 
-  const registerEmptyAnswer = useCallback(() => {
-    const updatedAnswers: IAnswer[] = [
-      ...currentPlayer.answers,
-      new Answer(questions[currentQuestionNumber].id, ""),
-    ];
-
-    setCurrentPlayer({
-      ...currentPlayer,
-      answers: updatedAnswers,
-    });
-
-    return {
-      ...currentPlayer,
-      answers: updatedAnswers,
-    };
-  }, [currentPlayer, setCurrentPlayer, questions, currentQuestionNumber]);
-
-  const triggerNextQuestion = useCallback(() => {
-    setCurrentQuestionNumber(currentQuestionNumber + 1);
-    setCounter(10);
-  }, [currentQuestionNumber, setCurrentQuestionNumber, setCounter]);
-
   const triggerResultPage = useCallback(() => {
     navigate("/result");
   }, [navigate]);
 
+  const triggerNextQuestion = useCallback(() => {
+    if (currentQuestionNumber === questions.length - 1) {
+      triggerResultPage();
+      return;
+    }
+
+    setShowCorrectAnswer(false);
+    setIsTimerPaused(false);
+    setCurrentQuestionNumber(currentQuestionNumber + 1);
+    setCounter(10);
+  }, [
+    currentQuestionNumber,
+    setCurrentQuestionNumber,
+    setCounter,
+    triggerResultPage,
+    questions,
+  ]);
+
   useEffect(() => {
+    if (isTimerPaused) return;
+
     const timer = setInterval(() => {
-      // setCounter((previousSec) => (previousSec > 0 ? previousSec - 1 : 0));
+      setCounter((previousSec) => (previousSec > 0 ? previousSec - 1 : 0));
     }, 1000);
 
     if (counter === 0) {
-      const updatedCurrentPlayer = registerEmptyAnswer();
-      updateCurrentPlayerInLS(updatedCurrentPlayer);
-
-      triggerNextQuestion();
-
-      if (currentQuestionNumber === questions.length - 1) {
-        triggerResultPage();
-      }
+      setIsTimerPaused(true);
+      setShowNextButton(true);
+      setShowCorrectAnswer(true);
     }
 
     return () => clearInterval(timer);
-  }, [
-    counter,
-    setCurrentQuestionNumber,
-    currentQuestionNumber,
-    questions,
-    navigate,
-    triggerNextQuestion,
-    registerEmptyAnswer,
-    triggerResultPage,
-    updateCurrentPlayerInLS,
-  ]);
+  }, [counter, isTimerPaused]);
+
+  useEffect(() => {
+    setIsTimerPaused(false);
+  }, [currentQuestionNumber]);
 
   return (
     <div className="container">
       <p className="time-text">Tid kvar: {counter} sekunder ⏳</p>
-
       {currentQuestionNumber <= questions.length - 1 ? (
         questions.map((q, i) => {
           if (i === currentQuestionNumber) {
@@ -103,13 +92,20 @@ export const QuestionPage = () => {
                 key={`${q.id}-${i}`}
                 updateCurrentPlayerInLS={updateCurrentPlayerInLS}
                 triggerNewQuestion={() => {
-                  if (currentQuestionNumber === questions.length - 1) {
-                    triggerResultPage();
-                    return;
-                  }
                   triggerNextQuestion();
                 }}
                 question={questions[currentQuestionNumber]}
+                registerClickedAnswer={() => {
+                  setShowNextButton(true);
+                  setIsTimerPaused(true);
+                }}
+                isTimerPaused={isTimerPaused}
+                showCorrectAnswer={showCorrectAnswer}
+                setShowCorrectAnswer={(val: boolean) =>
+                  setShowCorrectAnswer(val)
+                }
+                selectedOpt={selectedOpt}
+                setSelectedOpt={(opt: string) => setSelectedOpt(opt)}
               ></QuestionCard>
             );
           }
@@ -117,6 +113,36 @@ export const QuestionPage = () => {
       ) : (
         <div>Något fel inträffade vid hämtning av frågor!</div>
       )}
+
+      <Box
+        sx={{
+          width: {
+            xxs: "90%",
+            xs: "90%",
+            sm: "60%",
+            md: "40%",
+            lg: "30%",
+            xl: "30%",
+          },
+          display: "flex",
+          justifyContent: "end",
+          paddingTop: "5%",
+        }}
+      >
+        {showNextButton && (
+          <Button
+            size="large"
+            variant="contained"
+            sx={{
+              background: Colors.primaryGold,
+              color: "black",
+            }}
+            onClick={() => triggerNextQuestion()}
+          >
+            Nästa
+          </Button>
+        )}
+      </Box>
     </div>
   );
 };

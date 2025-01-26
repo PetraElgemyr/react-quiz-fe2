@@ -35,15 +35,25 @@ interface IQuestionCardProps {
   question: IQuestion;
   triggerNewQuestion: () => void;
   updateCurrentPlayerInLS: (p: Player) => void;
+  registerClickedAnswer: () => void;
+  isTimerPaused: boolean;
+  showCorrectAnswer: boolean;
+  setShowCorrectAnswer: (val: boolean) => void;
+  selectedOpt: string;
+  setSelectedOpt: (opt: string) => void;
 }
 
 export const QuestionCard = ({
   question,
-  triggerNewQuestion,
   updateCurrentPlayerInLS,
+  registerClickedAnswer,
+  isTimerPaused,
+  showCorrectAnswer,
+  setShowCorrectAnswer,
+  selectedOpt,
+  setSelectedOpt,
 }: IQuestionCardProps) => {
   const { questions, currentPlayer, setCurrentPlayer } = useAppContext();
-
   const updateScoreForCurrentPlayer = (currentNewAnswers: Player) => {
     let scores = 0;
     questions.forEach((q, index) => {
@@ -73,20 +83,15 @@ export const QuestionCard = ({
         }
         return a;
       });
-    } else {
-      updatedAnswers = [
-        ...currentPlayer.answers,
-        {
-          questionId: question.id,
-          answer: clickedAnswer,
-        },
-      ];
     }
-    const newCurrentPlayer = { ...currentPlayer, answers: updatedAnswers };
-    const updatedCurrentToSave = updateScoreForCurrentPlayer(newCurrentPlayer);
+    const newCurrentPlayer: Player = {
+      ...currentPlayer,
+      answers: updatedAnswers,
+    };
+    const updatedCurrentToSave: Player =
+      updateScoreForCurrentPlayer(newCurrentPlayer);
     updateCurrentPlayerInLS(updatedCurrentToSave);
     setCurrentPlayer(updatedCurrentToSave);
-    triggerNewQuestion();
   };
 
   return (
@@ -128,10 +133,32 @@ export const QuestionCard = ({
 
         {question.options.map((opt, i) => (
           <ThemeProvider theme={optionCardTheme}>
-            <Card key={`${opt}-ind-${i}`}>
+            <Card
+              key={`${opt}-ind-${i}`}
+              sx={{
+                boxShadow: `${
+                  selectedOpt === opt ? "inset 0 0 8px rgb(46, 45, 45)" : "none"
+                }`,
+
+                backgroundColor: `${
+                  showCorrectAnswer
+                    ? opt === question.answer
+                      ? "green"
+                      : selectedOpt === opt
+                      ? "red"
+                      : Colors.backgroundWhite
+                    : Colors.backgroundWhite
+                }`,
+              }}
+            >
               <CardActionArea
                 onClick={() => {
-                  registerAnswer(opt);
+                  if (!isTimerPaused && !showCorrectAnswer) {
+                    setSelectedOpt(opt);
+                    setShowCorrectAnswer(true);
+                    registerClickedAnswer();
+                    registerAnswer(opt);
+                  }
                 }}
               >
                 <CardContent>
@@ -141,7 +168,6 @@ export const QuestionCard = ({
             </Card>
           </ThemeProvider>
         ))}
-
         <Stepper />
       </Card>
     </>
