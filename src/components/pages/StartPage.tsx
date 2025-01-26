@@ -4,11 +4,16 @@ import { useAppContext } from "../hooks/useAppContext";
 import { ChangeEvent, useEffect } from "react";
 import { Player } from "../models/Player";
 import { v4 as uuidv4 } from "uuid";
+import { Answer } from "../models/Answer";
 
 export const StartPage = () => {
   const navigate = useNavigate();
-  const { currentPlayer, setCurrentPlayer, setCurrentQuestionNumber } =
-    useAppContext();
+  const {
+    currentPlayer,
+    setCurrentPlayer,
+    setCurrentQuestionNumber,
+    questions,
+  } = useAppContext();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentPlayer({ ...currentPlayer, name: e.target.value });
@@ -27,8 +32,10 @@ export const StartPage = () => {
 
   useEffect(() => {
     setCurrentQuestionNumber(0);
-    setCurrentPlayer(new Player(uuidv4().toString(), "", 0, []));
-  }, [setCurrentQuestionNumber, setCurrentPlayer]);
+
+    const emptyAnswers = questions.map((q) => new Answer(q.id, ""));
+    setCurrentPlayer(new Player(uuidv4().toString(), "", 0, emptyAnswers));
+  }, [setCurrentQuestionNumber, setCurrentPlayer, questions]);
 
   return (
     <>
