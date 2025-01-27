@@ -8,6 +8,10 @@ export const LogoContainer = styled.div`
   justify-content: center;
   padding: 3% 3% 3% 4%;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   @media screen and (${devices.mobileL}) {
     width: 70%;
   }
