@@ -6,30 +6,12 @@ import { Player } from "./models/Player";
 import {
   CardActionArea,
   CardContent,
-  createTheme,
   ThemeProvider,
   Typography,
 } from "@mui/material";
 import { Colors } from "../styled/Variables/Colors";
 import { Stepper } from "./Stepper";
-
-const optionCardTheme = createTheme({
-  components: {
-    MuiCard: {
-      defaultProps: {
-        sx: {
-          textAlign: "center",
-          margin: 0,
-          padding: 0,
-          backgroundColor: Colors.backgroundWhite,
-          ":hover": {
-            boxShadow: "inset 0 0 8px rgb(46, 45, 45)",
-          },
-        },
-      },
-    },
-  },
-});
+import { QuestionOptionCardTheme } from "./themes/QuestionOptionCardTheme";
 
 interface IQuestionCardProps {
   question: IQuestion;
@@ -132,7 +114,7 @@ export const QuestionCard = ({
         </CardContent>
 
         {question.options.map((opt, i) => (
-          <ThemeProvider theme={optionCardTheme}>
+          <ThemeProvider theme={QuestionOptionCardTheme}>
             <Card
               key={`${opt}-ind-${i}`}
               sx={{
