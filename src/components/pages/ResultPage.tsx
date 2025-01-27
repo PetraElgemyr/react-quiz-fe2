@@ -14,8 +14,10 @@ import { HighScoreList } from "../HighScoreList";
 import { Colors } from "../../styled/Variables/Colors";
 import { AnswersContainer } from "../../styled/AnswersContainer";
 import { IAnswer } from "../interfaces/IAnswer";
-import { ColCentered, RowCentered } from "../../styled/Common/Common";
+import { ColCentered } from "../../styled/Common/Common";
 import { ResultOptionsCardTheme } from "../themes/ResultOptionsCardTheme";
+import { ButtonTheme } from "../themes/ButtonTheme";
+import { ResultPageButtonContainer } from "../../styled/ResultPageButtonContainer";
 
 export const ResultPage = () => {
   const { questions, currentPlayer, players, setPlayers } = useAppContext();
@@ -49,6 +51,15 @@ export const ResultPage = () => {
   return (
     <>
       <ColCentered>
+        {" "}
+        <ThemeProvider theme={ButtonTheme}>
+          <ResultPageButtonContainer>
+            <Button onClick={clearPlayersFromLS}>Rensa rekord</Button>
+            <Button onClick={() => navigate("/")}>{`${
+              currentPlayer.answers.length > 0 ? "Spela igen" : "Spela"
+            }`}</Button>
+          </ResultPageButtonContainer>
+        </ThemeProvider>
         {currentPlayer.answers.length > 0 && (
           <>
             <h3>Ditt resultat:</h3>
@@ -59,16 +70,7 @@ export const ResultPage = () => {
               </p>
             )}
           </>
-        )}
-        <RowCentered>
-          <Button variant="contained" onClick={clearPlayersFromLS}>
-            Rensa rekord
-          </Button>
-          <Button variant="contained" onClick={() => navigate("/")}>{`${
-            currentPlayer.answers.length > 0 ? "Spela igen" : "Spela"
-          }`}</Button>
-        </RowCentered>
-
+        )}{" "}
         <HighScoreList />
       </ColCentered>
 
