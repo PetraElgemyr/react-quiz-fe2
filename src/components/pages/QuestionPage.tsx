@@ -45,10 +45,12 @@ export const QuestionPage = () => {
 
   const triggerNextQuestion = useCallback(() => {
     if (currentQuestionNumber === questions.length - 1) {
+      setShowNextButton(false);
       triggerResultPage();
       return;
     }
 
+    setShowNextButton(false);
     setShowCorrectAnswer(false);
     setIsTimerPaused(false);
     setCurrentQuestionNumber(currentQuestionNumber + 1);

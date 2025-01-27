@@ -143,9 +143,9 @@ export const QuestionCard = ({
                 backgroundColor: `${
                   showCorrectAnswer
                     ? opt === question.answer
-                      ? "green"
+                      ? Colors.primaryGreen
                       : selectedOpt === opt
-                      ? "red"
+                      ? Colors.red
                       : Colors.backgroundWhite
                     : Colors.backgroundWhite
                 }`,
