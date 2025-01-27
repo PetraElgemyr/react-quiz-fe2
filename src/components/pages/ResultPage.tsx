@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "../scss/resultPage.scss";
 import { useAppContext } from "../hooks/useAppContext";
 import {
   Button,
