@@ -5,6 +5,9 @@ import { ChangeEvent, useEffect } from "react";
 import { Player } from "../models/Player";
 import { v4 as uuidv4 } from "uuid";
 import { Answer } from "../models/Answer";
+import { Button, ThemeProvider } from "@mui/material";
+import { ButtonTheme } from "../themes/ButtonTheme";
+import { TextFieldTheme } from "../themes/TextFieldTheme";
 
 export const StartPage = () => {
   const navigate = useNavigate();
@@ -17,6 +20,13 @@ export const StartPage = () => {
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentPlayer({ ...currentPlayer, name: e.target.value });
+  };
+
+  const checkIfNameIsValid = () => {
+    if (currentPlayer.name.length > 0) {
+      return true;
+    }
+    return false;
   };
 
   const addNewPlayerToLS = () => {
@@ -41,22 +51,32 @@ export const StartPage = () => {
     <>
       <h1>Quizdags!</h1>
       <h3>Är du smartaren än en ph-deltagare? Dags att ta reda på det!</h3>
-
       <h3>Ange namn:</h3>
-      <TextField
-        id="outlined-basic"
-        label="Outlined"
-        variant="outlined"
-        onChange={handleNameChange}
-      />
-      <button
-        onClick={() => {
-          addNewPlayerToLS();
-          navigate("/game");
-        }}
-      >
-        Kör!
-      </button>
+      <ThemeProvider theme={TextFieldTheme}>
+        <TextField
+          label="Namn"
+          helperText={
+            currentPlayer.name.length < 1
+              ? "Du måste ange ett namn med minst ett tecken"
+              : ""
+          }
+          onChange={handleNameChange}
+        />
+      </ThemeProvider>
+      <ThemeProvider theme={ButtonTheme}>
+        <Button
+          disabled={currentPlayer.name.length <= 0}
+          onClick={() => {
+            const isValid = checkIfNameIsValid();
+            if (isValid) {
+              addNewPlayerToLS();
+              navigate("/game");
+            }
+          }}
+        >
+          Starta
+        </Button>
+      </ThemeProvider>
     </>
   );
 };
