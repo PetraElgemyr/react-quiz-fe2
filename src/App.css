@@ -1,10 +1,12 @@
 html,
 body {
     min-height: 100vh;
-    background: linear-gradient(45deg, #BE418D, #BE7241);
+    background: linear-gradient(45deg, #BE7241, #BE418D);
+    font-family: Georgia, serif
 }
 
 * {
     box-sizing: border-box;
     overflow-x: hidden;
+    font-family: Georgia, serif
 }

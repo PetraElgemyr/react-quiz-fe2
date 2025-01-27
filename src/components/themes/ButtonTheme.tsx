@@ -10,6 +10,7 @@ export const ButtonTheme = createTheme({
         sx: {
           background: Colors.primaryGold,
           color: "black",
+          fontFamily: "Georgia, serif",
         },
       },
     },

@@ -18,6 +18,7 @@ import { ColCentered } from "../../styled/Common/Common";
 import { ResultOptionsCardTheme } from "../themes/ResultOptionsCardTheme";
 import { ButtonTheme } from "../themes/ButtonTheme";
 import { ResultPageButtonContainer } from "../../styled/ResultPageButtonContainer";
+import { CurrentResultHeadline, ResultText } from "../../styled/Headline";
 
 export const ResultPage = () => {
   const { questions, currentPlayer, players, setPlayers } = useAppContext();
@@ -51,27 +52,26 @@ export const ResultPage = () => {
   return (
     <>
       <ColCentered>
-        {" "}
         <ThemeProvider theme={ButtonTheme}>
           <ResultPageButtonContainer>
-            <Button onClick={clearPlayersFromLS}>Rensa rekord</Button>
+            <Button onClick={clearPlayersFromLS}>Rensa</Button>
             <Button onClick={() => navigate("/")}>{`${
               currentPlayer.answers.length > 0 ? "Spela igen" : "Spela"
             }`}</Button>
           </ResultPageButtonContainer>
         </ThemeProvider>
+        <HighScoreList />
         {currentPlayer.answers.length > 0 && (
           <>
-            <h3>Ditt resultat:</h3>
+            <CurrentResultHeadline>Ditt resultat:</CurrentResultHeadline>
             {players.find((p) => p.id === currentPlayer.id) && (
-              <p>
+              <ResultText>
                 Du fick {currentPlayer.score} rätt av {questions.length}{" "}
                 möjliga!
-              </p>
+              </ResultText>
             )}
           </>
-        )}{" "}
-        <HighScoreList />
+        )}
       </ColCentered>
 
       {currentPlayer.answers.length > 0 && (
@@ -114,6 +114,7 @@ export const ResultPage = () => {
                   <Card
                     key={`${opt}-ind-${i}`}
                     sx={{
+                      textAlign: "center",
                       boxShadow: `${
                         getAnswerForQuestion(q.id)?.answer === opt
                           ? "inset 0 0 8px rgb(46, 45, 45)"
