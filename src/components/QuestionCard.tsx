@@ -105,7 +105,7 @@ export const QuestionCard = ({
         }}
       >
         <CardContent sx={{ margin: 0, padding: 0 }}>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" color="black">
             Fråga {question.id}
           </Typography>
           <Typography variant="body2" color="black">
@@ -144,7 +144,9 @@ export const QuestionCard = ({
                 }}
               >
                 <CardContent sx={{ textAlign: "center" }}>
-                  <Typography variant="body1">{opt}</Typography>
+                  <Typography color="black" variant="body1">
+                    {opt}
+                  </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
