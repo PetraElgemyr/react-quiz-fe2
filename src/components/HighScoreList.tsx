@@ -11,8 +11,8 @@ export const HighScoreList = () => {
       {players.length > 0 &&
         players.map((p, i) => (
           <div key={`${p.name}-${i}`}>
-            <HighScoreText isBold={true}>{p.name}</HighScoreText>
-            <HighScoreText isBold={false}>- {p.score} poäng</HighScoreText>
+            <HighScoreText isbold={"true"}>{p.name}</HighScoreText>
+            <HighScoreText isbold={"false"}>- {p.score} poäng</HighScoreText>
           </div>
         ))}
     </>
