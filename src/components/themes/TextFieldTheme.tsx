@@ -11,18 +11,18 @@ export const TextFieldTheme = createTheme({
       styleOverrides: {
         root: {
           "&:after": {
-            borderBottomColor: "black",
+            borderBottomColor: "white",
           },
           "&:before": {
-            borderBottomColor: "rgba(0, 0, 0, 0.42)",
+            borderBottomColor: "white",
           },
           "&:hover:not(.Mui-disabled):before": {
-            borderBottomColor: "black",
+            borderBottomColor: "white",
           },
         },
         input: {
           "&:focus": {
-            color: "black",
+            color: "white",
           },
         },
       },
@@ -30,9 +30,17 @@ export const TextFieldTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
+          color: "white",
           "&.Mui-focused": {
-            color: "black",
+            color: "white",
           },
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          color: "white",
         },
       },
     },

@@ -1,0 +1,16 @@
+@use "mixins" as m;
+@use "variables" as v;
+
+
+* {
+    color: white
+}
+
+.list-container {
+    padding-bottom: 3%;
+
+    @media (min-width: v.$tablet) {
+        padding: 1%;
+
+    }
+}

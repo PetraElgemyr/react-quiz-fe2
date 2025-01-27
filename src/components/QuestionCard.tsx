@@ -143,7 +143,7 @@ export const QuestionCard = ({
                   }
                 }}
               >
-                <CardContent>
+                <CardContent sx={{ textAlign: "center" }}>
                   <Typography variant="body1">{opt}</Typography>
                 </CardContent>
               </CardActionArea>
