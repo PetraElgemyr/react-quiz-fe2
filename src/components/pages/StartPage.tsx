@@ -5,6 +5,15 @@ import { ChangeEvent, useEffect } from "react";
 import { Player } from "../models/Player";
 import { v4 as uuidv4 } from "uuid";
 import { Answer } from "../models/Answer";
+import { Button, ThemeProvider } from "@mui/material";
+import { ButtonTheme } from "../themes/ButtonTheme";
+import { TextFieldTheme } from "../themes/TextFieldTheme";
+import {
+  RegistrationContainer,
+  StartContainer,
+} from "../../styled/StartContainer";
+import "../scss/startPage.scss";
+import { ColCentered } from "../../styled/Common/Common";
 
 export const StartPage = () => {
   const navigate = useNavigate();
@@ -17,6 +26,13 @@ export const StartPage = () => {
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentPlayer({ ...currentPlayer, name: e.target.value });
+  };
+
+  const checkIfNameIsValid = () => {
+    if (currentPlayer.name.length > 0) {
+      return true;
+    }
+    return false;
   };
 
   const addNewPlayerToLS = () => {
@@ -39,24 +55,44 @@ export const StartPage = () => {
 
   return (
     <>
-      <h1>Quizdags!</h1>
-      <h3>Är du smartaren än en ph-deltagare? Dags att ta reda på det!</h3>
+      <ColCentered>
+        <StartContainer>
+          <h4 className="info-text">
+            Har DU alla attribut och kunskaper som krävs för att medverka i en
+            Paradise Hotel säsong? Är du smartare än en klassisk PH-deltagare?
+            Dags att ta reda på det. Det har blivit dags för... frågeceremoni
+          </h4>
+          <h4 className="name-text">Ange namn:</h4>{" "}
+        </StartContainer>
 
-      <h3>Ange namn:</h3>
-      <TextField
-        id="outlined-basic"
-        label="Outlined"
-        variant="outlined"
-        onChange={handleNameChange}
-      />
-      <button
-        onClick={() => {
-          addNewPlayerToLS();
-          navigate("/game");
-        }}
-      >
-        Kör!
-      </button>
+        <RegistrationContainer>
+          <ThemeProvider theme={TextFieldTheme}>
+            <TextField
+              label="Namn"
+              helperText={
+                currentPlayer.name.length < 1
+                  ? "Du måste ange ett namn med minst ett tecken"
+                  : ""
+              }
+              onChange={handleNameChange}
+            />
+          </ThemeProvider>
+          <ThemeProvider theme={ButtonTheme}>
+            <Button
+              disabled={currentPlayer.name.length <= 0}
+              onClick={() => {
+                const isValid = checkIfNameIsValid();
+                if (isValid) {
+                  addNewPlayerToLS();
+                  navigate("/game");
+                }
+              }}
+            >
+              Starta
+            </Button>
+          </ThemeProvider>
+        </RegistrationContainer>
+      </ColCentered>
     </>
   );
 };
