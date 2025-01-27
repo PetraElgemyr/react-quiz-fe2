@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import { ThemeProvider } from "@mui/material";
 import { ButtonTheme } from "../themes/ButtonTheme";
 
-export const QuestionPage = () => {
+export const QuizView = () => {
   const {
     questions,
     currentQuestionNumber,

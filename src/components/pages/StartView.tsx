@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { useAppContext } from "../hooks/useAppContext";
 import { ChangeEvent, useEffect } from "react";
@@ -15,8 +14,11 @@ import {
 import "../scss/startPage.scss";
 import { ColCentered } from "../../styled/Common/Common";
 
-export const StartPage = () => {
-  const navigate = useNavigate();
+interface IStartView {
+  setShowStartView: (val: boolean) => void;
+}
+
+export const StartView = ({ setShowStartView }: IStartView) => {
   const {
     currentPlayer,
     setCurrentPlayer,
@@ -84,7 +86,7 @@ export const StartPage = () => {
                 const isValid = checkIfNameIsValid();
                 if (isValid) {
                   addNewPlayerToLS();
-                  navigate("/game");
+                  setShowStartView(false);
                 }
               }}
             >
