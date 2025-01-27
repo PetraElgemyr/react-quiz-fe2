@@ -2,37 +2,67 @@
   {
     "id": 1,
     "question": "Vilket av dessa år var ett skottår?",
-    "options": ["2002", "2004", "2006"],
+    "options": ["2001", "2002", "2003", "2004"],
     "answer": "2004"
   },
   {
     "id": 2,
     "question": "Vilket land har flest öar i världen?",
-    "options": ["Filippinerna", "Kanada", "Sverige"],
+    "options": ["Finland", "Filippinerna", "Kanada", "Sverige"],
     "answer": "Sverige"
   },
   {
     "id": 3,
     "question": "Vilken är den femte planeten i vårat solsystem?",
-    "options": ["Uranus", "Jupiter", "Saturnus"],
+    "options": ["Uranus", "Neptunus", "Jupiter", "Saturnus"],
     "answer": "Jupiter"
   },
   {
     "id": 4,
     "question": "Vad är 53+21?",
-    "options": ["77", "74", "72"],
+    "options": ["77", "75", "74", "72"],
     "answer": "74"
   },
   {
     "id": 5,
     "question": "Vilken av dessa huvudstäder ligger sydligast?",
-    "options": ["Wellington", "Kapstaden", "Buenos Aires"],
+    "options": ["Wellington", "Kapstaden", "Canberra", "Buenos Aires"],
     "answer": "Wellington"
   },
   {
     "id": 6,
     "question": "Vad är kvadratroten av 121",
-    "options": ["9", "10", "11"],
+    "options": ["9", "10", "11", "12"],
     "answer": "11"
+  },
+  {
+    "id": 7,
+    "question": "Vilken av följande är inte en hundras?",
+    "options": ["Jämthund", "Pumi", "Låglandsterrier", "Akita"],
+    "answer": "Låglandsterrier"
+  },
+  {
+    "id": 8,
+    "question": "Vilket av talen är ett primtal?",
+    "options": ["102", "19", "81", "76"],
+    "answer": "19"
+  },
+  {
+    "id": 9,
+    "question": "Hur många stjärnor har USA:s flagga?",
+    "options": ["49", "50", "51", "52"],
+    "answer": "50"
+  },
+  {
+    "id": 10,
+    "question": "Hur många världsdelar finns det?",
+    "options": ["5", "6", "7", "8"],
+    "answer": "7"
+  },
+  {
+    "id": 11,
+    "question": "Från vilket djurs mjölk tillverkas vanlig mozzarella ifrån?",
+    "options": ["Get", "Kamel", "Får", "Ko"],
+    "answer": "Ko"
   }
 ]

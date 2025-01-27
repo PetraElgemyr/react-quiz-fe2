@@ -1,22 +1,24 @@
-import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
-import { useAppContext } from "../hooks/useAppContext";
 import { ChangeEvent, useEffect } from "react";
-import { Player } from "../models/Player";
 import { v4 as uuidv4 } from "uuid";
-import { Answer } from "../models/Answer";
 import { Button, ThemeProvider } from "@mui/material";
-import { ButtonTheme } from "../themes/ButtonTheme";
-import { TextFieldTheme } from "../themes/TextFieldTheme";
+import { ColCentered } from "../styled/Common/Common";
 import {
-  RegistrationContainer,
   StartContainer,
-} from "../../styled/StartContainer";
-import "../scss/startPage.scss";
-import { ColCentered } from "../../styled/Common/Common";
+  RegistrationContainer,
+} from "../styled/StartContainer";
+import { useAppContext } from "./hooks/useAppContext";
+import { Answer } from "./models/Answer";
+import { Player } from "./models/Player";
+import { ButtonTheme } from "./themes/ButtonTheme";
+import { TextFieldTheme } from "./themes/TextFieldTheme";
+import "./scss/startView.scss";
 
-export const StartPage = () => {
-  const navigate = useNavigate();
+interface IStartView {
+  setShowStartView: (val: boolean) => void;
+}
+
+export const StartView = ({ setShowStartView }: IStartView) => {
   const {
     currentPlayer,
     setCurrentPlayer,
@@ -84,7 +86,7 @@ export const StartPage = () => {
                 const isValid = checkIfNameIsValid();
                 if (isValid) {
                   addNewPlayerToLS();
-                  navigate("/game");
+                  setShowStartView(false);
                 }
               }}
             >

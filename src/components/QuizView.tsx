@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../hooks/useAppContext";
-import { QuestionCard } from "../QuestionCard";
-import { Player } from "../models/Player";
-import "../scss/questionPage.scss";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { ThemeProvider } from "@mui/material";
-import { ButtonTheme } from "../themes/ButtonTheme";
+import { useAppContext } from "./hooks/useAppContext";
+import { Player } from "./models/Player";
+import { QuestionCard } from "./QuestionCard";
+import { ButtonTheme } from "./themes/ButtonTheme";
+import "./scss/quizView.scss";
 
-export const QuestionPage = () => {
+export const QuizView = () => {
   const {
     questions,
     currentQuestionNumber,
@@ -92,7 +92,7 @@ export const QuestionPage = () => {
           if (i === currentQuestionNumber) {
             return (
               <QuestionCard
-                key={`${q.id}-${i}`}
+                key={`${q.id}-${q.answer}-${i}`}
                 updateCurrentPlayerInLS={updateCurrentPlayerInLS}
                 triggerNewQuestion={() => {
                   triggerNextQuestion();

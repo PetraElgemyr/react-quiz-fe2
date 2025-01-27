@@ -75,8 +75,9 @@ export const ResultPage = () => {
 
       {currentPlayer.answers.length > 0 && (
         <AnswersContainer>
-          {questions.map((q) => (
+          {questions.map((q, i) => (
             <Card
+              key={`${q.id}-${q.answer}-${i}`}
               sx={{
                 padding: {
                   xxs: "10%",
@@ -128,8 +129,10 @@ export const ResultPage = () => {
                       }`,
                     }}
                   >
-                    <CardContent>
-                      <Typography variant="body1">{opt}</Typography>
+                    <CardContent sx={{ textAlign: "center" }}>
+                      <Typography color="black" variant="body1">
+                        {opt}
+                      </Typography>
                     </CardContent>
                   </Card>
                 </ThemeProvider>
