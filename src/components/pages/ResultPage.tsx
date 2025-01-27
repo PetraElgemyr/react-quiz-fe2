@@ -1,10 +1,24 @@
 import { useEffect } from "react";
 import "../scss/resultPage.scss";
 import { useAppContext } from "../hooks/useAppContext";
-import { IQuestion } from "../interfaces/IQuestion";
-import { Button } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
 import { Player } from "../models/Player";
 import { useNavigate } from "react-router-dom";
+import { HighScoreList } from "../HighScoreList";
+import { Colors } from "../../styled/Variables/Colors";
+import { AnswersContainer } from "../../styled/AnswersContainer";
+import { IAnswer } from "../interfaces/IAnswer";
+import { ColCentered } from "../../styled/Common/Common";
+import { ResultOptionsCardTheme } from "../themes/ResultOptionsCardTheme";
+import { ButtonTheme } from "../themes/ButtonTheme";
+import { ResultPageButtonContainer } from "../../styled/ResultPageButtonContainer";
+import { CurrentResultHeadline, ResultText } from "../../styled/Headline";
 
 export const ResultPage = () => {
   const { questions, currentPlayer, players, setPlayers } = useAppContext();
@@ -20,66 +34,111 @@ export const ResultPage = () => {
     }
   }, [currentPlayer, setPlayers]);
 
-  const returnCorrectAnswerClassName = (question: IQuestion, opt: string) => {
-    const answerToQuestion = currentPlayer.answers.find(
-      (a) => a.questionId === question.id
-    );
-    let className = "";
-
-    if (answerToQuestion && answerToQuestion.answer === opt) {
-      className = "-choosen";
-    }
-
-    if (question.answer === opt) {
-      className = className + "-correct";
-    } else {
-      className = className + "-incorrect";
-    }
-
-    return className;
-  };
-
   const clearPlayersFromLS = () => {
     localStorage.setItem("players", "[]");
     setPlayers(JSON.parse(localStorage.getItem("players") ?? "[]"));
   };
 
+  const getAnswerForQuestion = (questionId: number) => {
+    const question = currentPlayer.answers.find(
+      (a: IAnswer) => a.questionId === questionId
+    );
+
+    if (question) {
+      return question;
+    }
+  };
+
   return (
     <>
-      <h3>Ditt resultat:</h3>
-      {players.find((p) => p.id === currentPlayer.id) && (
-        <p>
-          Du fick {currentPlayer.score} rätt av {questions.length} möjliga!
-        </p>
-      )}
-      <Button onClick={clearPlayersFromLS}>Rensa rekord</Button>
-      <Button onClick={() => navigate("/")}>Spela igen!</Button>
-      <h4>Rekord</h4>
-      {players.length > 0 &&
-        players.map((p, i) => (
-          <div key={`${p.name}-${i}`}>
-            <p>
-              <span>
-                {p.name} - {p.score} poäng
-              </span>
-            </p>
-          </div>
-        ))}
-      {questions.map((q) => (
-        <div key={q.id} className="question-card">
-          <p>{q.question}</p>
+      <ColCentered>
+        <ThemeProvider theme={ButtonTheme}>
+          <ResultPageButtonContainer>
+            <Button onClick={clearPlayersFromLS}>Rensa</Button>
+            <Button onClick={() => navigate("/")}>{`${
+              currentPlayer.answers.length > 0 ? "Spela igen" : "Spela"
+            }`}</Button>
+          </ResultPageButtonContainer>
+        </ThemeProvider>
+        <HighScoreList />
+        {currentPlayer.answers.length > 0 && (
+          <>
+            <CurrentResultHeadline>Ditt resultat:</CurrentResultHeadline>
+            {players.find((p) => p.id === currentPlayer.id) && (
+              <ResultText>
+                Du fick {currentPlayer.score} rätt av {questions.length}{" "}
+                möjliga!
+              </ResultText>
+            )}
+          </>
+        )}
+      </ColCentered>
 
-          {q.options.map((opt) => (
-            <p
-              className={`option ${returnCorrectAnswerClassName(q, opt)} 
-              `}
-              key={opt}
+      {currentPlayer.answers.length > 0 && (
+        <AnswersContainer>
+          {questions.map((q) => (
+            <Card
+              sx={{
+                padding: {
+                  xxs: "10%",
+                  xs: "8%",
+                  sm: "6%",
+                  md: "5%",
+                  lg: "4%",
+                  xl: "3%",
+                },
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+                justifyContent: "center",
+                width: {
+                  xxs: "90%",
+                  xs: "80%",
+                  sm: "40%",
+                  md: "28%",
+                  lg: "24%",
+                  xl: "20%",
+                },
+                background: Colors.primaryGold,
+                boxShadow: "5px 5px 10px 1px rgba(59, 47, 47, 0.7)",
+              }}
             >
-              {opt}
-            </p>
+              <CardContent sx={{ margin: 0, padding: 0 }}>
+                <Typography variant="body2" color="black">
+                  {q.question}
+                </Typography>
+              </CardContent>
+
+              {q.options.map((opt, i) => (
+                <ThemeProvider theme={ResultOptionsCardTheme}>
+                  <Card
+                    key={`${opt}-ind-${i}`}
+                    sx={{
+                      textAlign: "center",
+                      boxShadow: `${
+                        getAnswerForQuestion(q.id)?.answer === opt
+                          ? "inset 0 0 8px rgb(46, 45, 45)"
+                          : "none"
+                      }`,
+                      backgroundColor: `${
+                        opt === q.answer
+                          ? Colors.primaryGreen
+                          : getAnswerForQuestion(q.id)?.answer === opt
+                          ? Colors.red
+                          : Colors.backgroundWhite
+                      }`,
+                    }}
+                  >
+                    <CardContent>
+                      <Typography variant="body1">{opt}</Typography>
+                    </CardContent>
+                  </Card>
+                </ThemeProvider>
+              ))}
+            </Card>
           ))}
-        </div>
-      ))}
+        </AnswersContainer>
+      )}
     </>
   );
 };

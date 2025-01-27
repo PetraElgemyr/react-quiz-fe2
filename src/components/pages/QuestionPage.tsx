@@ -5,8 +5,9 @@ import { QuestionCard } from "../QuestionCard";
 import { Player } from "../models/Player";
 import "../scss/questionPage.scss";
 import Button from "@mui/material/Button";
-import { Colors } from "../../styled/Variables/Colors";
 import Box from "@mui/material/Box";
+import { ThemeProvider } from "@mui/material";
+import { ButtonTheme } from "../themes/ButtonTheme";
 
 export const QuestionPage = () => {
   const {
@@ -45,10 +46,12 @@ export const QuestionPage = () => {
 
   const triggerNextQuestion = useCallback(() => {
     if (currentQuestionNumber === questions.length - 1) {
+      setShowNextButton(false);
       triggerResultPage();
       return;
     }
 
+    setShowNextButton(false);
     setShowCorrectAnswer(false);
     setIsTimerPaused(false);
     setCurrentQuestionNumber(currentQuestionNumber + 1);
@@ -130,17 +133,9 @@ export const QuestionPage = () => {
         }}
       >
         {showNextButton && (
-          <Button
-            size="large"
-            variant="contained"
-            sx={{
-              background: Colors.primaryGold,
-              color: "black",
-            }}
-            onClick={() => triggerNextQuestion()}
-          >
-            Nästa
-          </Button>
+          <ThemeProvider theme={ButtonTheme}>
+            <Button onClick={() => triggerNextQuestion()}>Nästa</Button>
+          </ThemeProvider>
         )}
       </Box>
     </div>
