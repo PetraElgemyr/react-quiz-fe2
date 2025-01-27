@@ -8,6 +8,10 @@ import { Answer } from "../models/Answer";
 import { Button, ThemeProvider } from "@mui/material";
 import { ButtonTheme } from "../themes/ButtonTheme";
 import { TextFieldTheme } from "../themes/TextFieldTheme";
+import {
+  RegistrationContainer,
+  StartContainer,
+} from "../../styled/StartContainer";
 
 export const StartPage = () => {
   const navigate = useNavigate();
@@ -49,34 +53,40 @@ export const StartPage = () => {
 
   return (
     <>
-      <h1>Quizdags!</h1>
-      <h3>Är du smartaren än en ph-deltagare? Dags att ta reda på det!</h3>
-      <h3>Ange namn:</h3>
-      <ThemeProvider theme={TextFieldTheme}>
-        <TextField
-          label="Namn"
-          helperText={
-            currentPlayer.name.length < 1
-              ? "Du måste ange ett namn med minst ett tecken"
-              : ""
-          }
-          onChange={handleNameChange}
-        />
-      </ThemeProvider>
-      <ThemeProvider theme={ButtonTheme}>
-        <Button
-          disabled={currentPlayer.name.length <= 0}
-          onClick={() => {
-            const isValid = checkIfNameIsValid();
-            if (isValid) {
-              addNewPlayerToLS();
-              navigate("/game");
-            }
-          }}
-        >
-          Starta
-        </Button>
-      </ThemeProvider>
+      <StartContainer>
+        <h4>
+          Är du smartaren än en paradise hotel-deltagare? Dags att ta reda på
+          det, om du vågar...
+        </h4>
+        <h4>Ange namn:</h4>
+        <RegistrationContainer>
+          <ThemeProvider theme={TextFieldTheme}>
+            <TextField
+              label="Namn"
+              helperText={
+                currentPlayer.name.length < 1
+                  ? "Du måste ange ett namn med minst ett tecken"
+                  : ""
+              }
+              onChange={handleNameChange}
+            />
+          </ThemeProvider>
+          <ThemeProvider theme={ButtonTheme}>
+            <Button
+              disabled={currentPlayer.name.length <= 0}
+              onClick={() => {
+                const isValid = checkIfNameIsValid();
+                if (isValid) {
+                  addNewPlayerToLS();
+                  navigate("/game");
+                }
+              }}
+            >
+              Starta
+            </Button>
+          </ThemeProvider>
+        </RegistrationContainer>
+      </StartContainer>
     </>
   );
 };
