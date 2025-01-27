@@ -13,6 +13,7 @@ import {
   StartContainer,
 } from "../../styled/StartContainer";
 import "../scss/startPage.scss";
+import { ColCentered } from "../../styled/Common/Common";
 
 export const StartPage = () => {
   const navigate = useNavigate();
@@ -54,13 +55,16 @@ export const StartPage = () => {
 
   return (
     <>
-      <StartContainer>
-        <h4 className="info-text">
-          Har DU alla attribut och kunskaper som krävs för att medverka i en
-          Paradise Hotel säsong? Är du smartare än en klassisk PH-deltagare?
-          Dags att ta reda på det. Det har blivit dags för... frågeceremoni
-        </h4>
-        <h4 className="name-text">Ange namn:</h4>
+      <ColCentered>
+        <StartContainer>
+          <h4 className="info-text">
+            Har DU alla attribut och kunskaper som krävs för att medverka i en
+            Paradise Hotel säsong? Är du smartare än en klassisk PH-deltagare?
+            Dags att ta reda på det. Det har blivit dags för... frågeceremoni
+          </h4>
+          <h4 className="name-text">Ange namn:</h4>{" "}
+        </StartContainer>
+
         <RegistrationContainer>
           <ThemeProvider theme={TextFieldTheme}>
             <TextField
@@ -88,7 +92,7 @@ export const StartPage = () => {
             </Button>
           </ThemeProvider>
         </RegistrationContainer>
-      </StartContainer>
+      </ColCentered>
     </>
   );
 };
