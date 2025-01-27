@@ -11,6 +11,10 @@
 
     @media (min-width: v.$tablet) {
         padding: 1%;
+    }
 
+    @media (min-width: v.$desktop) {
+        padding: 0.5%;
+        font-size: 1.5rem;
     }
 }

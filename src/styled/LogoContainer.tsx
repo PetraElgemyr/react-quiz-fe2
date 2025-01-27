@@ -3,29 +3,29 @@ import { devices } from "./Variables/Devices";
 
 export const LogoContainer = styled.div`
   width: 90%;
-  padding: 0;
   margin: 0;
   display: flex;
   justify-content: center;
-  padding: 3%;
+  padding: 3% 3% 3% 4%;
 
   @media screen and (${devices.mobileL}) {
     width: 70%;
   }
 
   @media screen and (${devices.tablet}) {
-    width: 55%;
+    width: 50%;
+    padding: 0 1% 2% 2%;
   }
 
   @media screen and (${devices.laptop}) {
-    width: 50%;
+    width: 45%;
   }
 
   @media screen and (${devices.laptopL}) {
-    width: 40%;
+    width: 35%;
   }
 
   @media screen and (${devices.fourK}) {
-    width: 35%;
+    width: 30%;
   }
 `;
