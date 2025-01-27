@@ -2,7 +2,7 @@
   {
     "id": 1,
     "question": "Vilket av dessa år var ett skottår?",
-    "options": ["2002", "2003", "2004", "2005", "2006"],
+    "options": ["2001", "2002", "2003", "2004"],
     "answer": "2004"
   },
   {
@@ -26,7 +26,7 @@
   {
     "id": 5,
     "question": "Vilken av dessa huvudstäder ligger sydligast?",
-    "options": ["Wellington", "Kapstaden", "Buenos Aires"],
+    "options": ["Wellington", "Kapstaden", "Canberra", "Buenos Aires"],
     "answer": "Wellington"
   },
   {
