@@ -12,7 +12,10 @@ import { Answer } from "./models/Answer";
 import { Player } from "./models/Player";
 import { ButtonTheme } from "./themes/ButtonTheme";
 import { TextFieldTheme } from "./themes/TextFieldTheme";
+import goldenBall from "../golden-ball.png";
 import "./scss/startView.scss";
+import { GoldenBallContainer } from "../styled/GoldenBallContainer";
+import { LogoImg } from "../styled/LogoImg";
 
 interface IStartView {
   setShowStartView: (val: boolean) => void;
@@ -72,8 +75,11 @@ export const StartView = ({ setShowStartView }: IStartView) => {
           <h4 className="info-text">
             Har DU alla attribut och kunskaper som krävs för att medverka i en
             Paradise Hotel säsong? Är du smartare än en klassisk PH-deltagare?
-            Dags att ta reda på det. Det har blivit dags för... frågeceremoni
+            Dags att ta reda på det. Det har blivit dags för... frågeceremoni!🤗
           </h4>
+          <GoldenBallContainer>
+            <LogoImg src={goldenBall} alt="golden-ball" />
+          </GoldenBallContainer>
           <h4 className="name-text">Ange namn:</h4>{" "}
         </StartContainer>
 

@@ -18,7 +18,7 @@ export const LogoContainer = styled.div`
 
   @media screen and (${devices.tablet}) {
     width: 50%;
-    padding: 0 1% 2% 2%;
+    padding: 0 1% 4% 2%;
   }
 
   @media screen and (${devices.laptop}) {
