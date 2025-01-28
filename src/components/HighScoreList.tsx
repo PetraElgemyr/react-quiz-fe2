@@ -24,12 +24,12 @@ export const HighScoreList = () => {
                   <HighScoreText
                     isbold={currentPlayer.name === p.name ? "true" : ""}
                   >
-                    {p.name}
+                    {`${i + 1}. ${p.name}`}
                   </HighScoreText>
                   <HighScoreText
                     isbold={currentPlayer.name === p.name ? "true" : ""}
                   >
-                    - {p.score} poäng
+                    {` - ${p.score}`} poäng
                   </HighScoreText>
                 </div>
               );
