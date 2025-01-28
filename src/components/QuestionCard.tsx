@@ -92,7 +92,14 @@ export const QuestionCard = ({
           },
           display: "flex",
           flexDirection: "column",
-          gap: "20px",
+          gap: {
+            xxs: "15px",
+            xs: "15px",
+            sm: "15px",
+            md: "17px",
+            lg: "17px",
+            xl: "20px",
+          },
           width: {
             xxs: "90%",
             xs: "90%",
@@ -154,9 +161,9 @@ export const QuestionCard = ({
                       xxs: "5%",
                       xs: "4%",
                       sm: "3.5%",
-                      md: "3%",
+                      md: "3.5%",
                       lg: "3%",
-                      xl: "2%",
+                      xl: "3%",
                     },
                   }}
                 >
