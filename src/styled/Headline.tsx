@@ -12,3 +12,7 @@ export const ResultText = styled.h3`
   margin-top: 0;
   font-weight: bold;
 `;
+
+export const GoldenO = styled.img`
+  height: 1.2rem;
+`;
