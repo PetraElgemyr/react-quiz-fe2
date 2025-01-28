@@ -13,6 +13,10 @@ export const LogoContainer = styled.div`
   }
 
   @media screen and (${devices.mobileL}) {
-    width: 70%;
+    width: 80%;
+  }
+
+  @media screen and (${devices.tablet}) {
+    padding: 0 3% 1% 4%;
   }
 `;

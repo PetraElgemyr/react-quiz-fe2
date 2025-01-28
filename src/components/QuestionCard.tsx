@@ -92,7 +92,14 @@ export const QuestionCard = ({
           },
           display: "flex",
           flexDirection: "column",
-          gap: "20px",
+          gap: {
+            xxs: "15px",
+            xs: "15px",
+            sm: "15px",
+            md: "17px",
+            lg: "17px",
+            xl: "20px",
+          },
           width: {
             xxs: "90%",
             xs: "90%",
@@ -105,10 +112,19 @@ export const QuestionCard = ({
         }}
       >
         <CardContent sx={{ margin: 0, padding: 0 }}>
-          <Typography gutterBottom variant="h5" component="div" color="black">
+          <Typography
+            gutterBottom
+            variant="h6"
+            color="black"
+            fontFamily={"Georgia, serif"}
+          >
             Fråga {question.id}
           </Typography>
-          <Typography variant="body2" color="black">
+          <Typography
+            fontFamily={"Georgia, serif"}
+            variant="body1"
+            color="black"
+          >
             {question.question}
           </Typography>
         </CardContent>
@@ -154,13 +170,17 @@ export const QuestionCard = ({
                       xxs: "5%",
                       xs: "4%",
                       sm: "3.5%",
-                      md: "3%",
+                      md: "3.5%",
                       lg: "3%",
-                      xl: "2%",
+                      xl: "3%",
                     },
                   }}
                 >
-                  <Typography color="black" variant="body1">
+                  <Typography
+                    color="black"
+                    variant="body1"
+                    fontFamily={"Georgia, serif"}
+                  >
                     {opt}
                   </Typography>
                 </CardContent>

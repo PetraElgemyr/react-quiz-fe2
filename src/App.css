@@ -1,9 +1,13 @@
 html,
 body {
-    background: linear-gradient(45deg, #BE7241, #BE418D, #da6440);
-    background-size: 350% 350%;
+    background: linear-gradient(45deg, #da6440, #c25797, #9f43a7,  #a74276, #BE7241);
+    background-repeat: no-repeat;
+    background-size: 300% 300%;
     animation: gradient 13s ease infinite;
     font-family: Georgia, serif;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0; 
 }
 
 

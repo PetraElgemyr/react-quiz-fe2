@@ -7,12 +7,10 @@ export const HeaderWrapper = styled.header`
   align-items: center;
   flex-wrap: wrap;
   padding: 2%;
+  padding-top: 4%;
 
   @media screen and (${devices.mobileL}) {
     padding: 1%;
-  }
-
-  @media screen and (${devices.tablet}) {
-    padding: 0;
+    padding-top: 3%;
   }
 `;

@@ -3,6 +3,7 @@ import { useAppContext } from "../hooks/useAppContext";
 import {
   Button,
   Card,
+  CardActionArea,
   CardContent,
   ThemeProvider,
   Typography,
@@ -14,10 +15,10 @@ import { Colors } from "../../styled/Variables/Colors";
 import { AnswersContainer } from "../../styled/AnswersContainer";
 import { IAnswer } from "../interfaces/IAnswer";
 import { ColCentered } from "../../styled/Common/Common";
-import { ResultOptionsCardTheme } from "../themes/ResultOptionsCardTheme";
 import { ButtonTheme } from "../themes/ButtonTheme";
 import { ResultPageButtonContainer } from "../../styled/ResultPageButtonContainer";
 import { CurrentResultHeadline, ResultText } from "../../styled/Headline";
+import { QuestionOptionCardTheme } from "../themes/QuestionOptionCardTheme";
 
 export const ResultPage = () => {
   const { questions, currentPlayer, players, setPlayers } = useAppContext();
@@ -110,10 +111,12 @@ export const ResultPage = () => {
               </CardContent>
 
               {q.options.map((opt, i) => (
-                <ThemeProvider theme={ResultOptionsCardTheme}>
+                <ThemeProvider theme={QuestionOptionCardTheme}>
                   <Card
                     key={`${opt}-ind-${i}`}
                     sx={{
+                      padding: 0,
+                      margin: 0,
                       textAlign: "center",
                       boxShadow: `${
                         getAnswerForQuestion(q.id)?.answer === opt
@@ -129,11 +132,25 @@ export const ResultPage = () => {
                       }`,
                     }}
                   >
-                    <CardContent sx={{ textAlign: "center" }}>
-                      <Typography color="black" variant="body1">
-                        {opt}
-                      </Typography>
-                    </CardContent>
+                    <CardActionArea>
+                      <CardContent
+                        sx={{
+                          textAlign: "center",
+                          padding: {
+                            xxs: "5%",
+                            xs: "4%",
+                            sm: "3.5%",
+                            md: "3%",
+                            lg: "3%",
+                            xl: "2%",
+                          },
+                        }}
+                      >
+                        <Typography color="black" variant="body1">
+                          {opt}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
                   </Card>
                 </ThemeProvider>
               ))}
