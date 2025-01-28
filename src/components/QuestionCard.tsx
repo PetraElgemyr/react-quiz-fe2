@@ -120,7 +120,12 @@ export const QuestionCard = ({
                 boxShadow: `${
                   selectedOpt === opt ? "inset 0 0 8px rgb(46, 45, 45)" : "none"
                 }`,
-
+                "&:hover": !isTimerPaused
+                  ? {
+                      boxShadow: "inset 0 0 8px rgb(46, 45, 45)",
+                    }
+                  : undefined,
+                transition: "box-shadow 0.2s ease",
                 backgroundColor: `${
                   showCorrectAnswer
                     ? opt === question.answer
@@ -142,7 +147,19 @@ export const QuestionCard = ({
                   }
                 }}
               >
-                <CardContent sx={{ textAlign: "center" }}>
+                <CardContent
+                  sx={{
+                    textAlign: "center",
+                    padding: {
+                      xxs: "5%",
+                      xs: "4%",
+                      sm: "3.5%",
+                      md: "3%",
+                      lg: "3%",
+                      xl: "2%",
+                    },
+                  }}
+                >
                   <Typography color="black" variant="body1">
                     {opt}
                   </Typography>
