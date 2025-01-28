@@ -8,6 +8,10 @@ import { Player } from "./models/Player";
 import { QuestionCard } from "./QuestionCard";
 import { ButtonTheme } from "./themes/ButtonTheme";
 import "./scss/quizView.scss";
+import { GoldenBallContainer } from "../styled/GoldenBallContainer";
+import { StyledImg } from "../styled/Images";
+import goldenBall from "../golden-ball.png";
+import crackedGolden from "../cracked-golden.png";
 
 export const QuizView = () => {
   const {
@@ -86,13 +90,19 @@ export const QuizView = () => {
 
   return (
     <div className="container">
+      <GoldenBallContainer>
+        <StyledImg
+          src={!showNextButton && !isTimerPaused ? goldenBall : crackedGolden}
+          alt="golden-ball"
+        />
+      </GoldenBallContainer>
       <p className="time-text">Tid kvar: {counter} sekunder ⏳</p>
       {currentQuestionNumber <= questions.length - 1 ? (
         questions.map((q, i) => {
           if (i === currentQuestionNumber) {
             return (
               <QuestionCard
-                key={`${q.id}-${q.answer}-${i}`}
+                key={`qc-${q.id}-${q.answer}-${i}`}
                 updateCurrentPlayerInLS={updateCurrentPlayerInLS}
                 triggerNewQuestion={() => {
                   triggerNextQuestion();

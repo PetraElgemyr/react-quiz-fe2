@@ -79,7 +79,7 @@ export const QuestionCard = ({
   return (
     <>
       <Card
-        key={`q-${question.id}-${question.answer}`}
+        key={`q-${question.id}-${question.question}-${question.answer}`}
         sx={{
           background: Colors.primaryGold,
           padding: {
@@ -112,9 +112,8 @@ export const QuestionCard = ({
             {question.question}
           </Typography>
         </CardContent>
-
         {question.options.map((opt, i) => (
-          <ThemeProvider theme={QuestionOptionCardTheme}>
+          <ThemeProvider theme={QuestionOptionCardTheme} key={`${opt}-${i}`}>
             <Card
               key={`${opt}-ind-${i}`}
               sx={{

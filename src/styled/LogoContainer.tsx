@@ -6,7 +6,7 @@ export const LogoContainer = styled.div`
   margin: 0;
   display: flex;
   justify-content: center;
-  padding: 3% 3% 3% 4%;
+  padding: 1% 3% 3% 4%;
 
   &:hover {
     cursor: pointer;
@@ -16,20 +16,18 @@ export const LogoContainer = styled.div`
     width: 70%;
   }
 
+  // @media screen and (${devices.tablet}) {
+  //   width: 50%;
+  //   padding: 0 1% 4% 2%;
+  // }
+
   @media screen and (${devices.tablet}) {
-    width: 50%;
-    padding: 0 1% 2% 2%;
+    width: 100%;
+    padding: 0.5% 3% 2% 4%;
   }
 
-  @media screen and (${devices.laptop}) {
-    width: 45%;
-  }
-
-  @media screen and (${devices.laptopL}) {
-    width: 35%;
-  }
-
-  @media screen and (${devices.fourK}) {
-    width: 30%;
-  }
+  // @media screen and (${devices.laptop}) {
+  //   width: 100%;
+  //   padding: 0.5% 3% 2% 4%;
+  // }
 `;

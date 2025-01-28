@@ -12,13 +12,24 @@ export const StartContainer = styled(ColCentered)`
   }
 
   @media screen and (${devices.tablet}) {
-    width: 60%;
+    width: 55%;
+  }
+
+  @media screen and (${devices.laptop}) {
+    width: 50%;
+  }
+  @media screen and (${devices.laptopL}) {
+    width: 45%;
+  }
+
+  @media screen and (${devices.fourK}) {
+    width: 30%;
   }
 `;
 
 export const RegistrationContainer = styled(ColCentered)`
   padding: 0 5% 0 5%;
-  width: 90%;
+  width: 85%;
   gap: 30px;
 
   @media screen and (${devices.mobileL}) {
@@ -26,6 +37,18 @@ export const RegistrationContainer = styled(ColCentered)`
   }
 
   @media screen and (${devices.tablet}) {
-    width: 60%;
+    width: 55%;
+  }
+
+  @media screen and (${devices.laptop}) {
+    width: 50%;
+  }
+
+  @media screen and (${devices.laptopL}) {
+    width: 45%;
+  }
+
+  @media screen and (${devices.fourK}) {
+    width: 30%;
   }
 `;

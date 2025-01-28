@@ -5,7 +5,15 @@
     width: 100%;
     @include m.centering-col;
     margin: 0;
-    padding: 5%;
+    padding: 1% 5%;
+
+    @media (min-width: v.$tablet) {
+        padding:0 4%;
+    }
+
+    @media (min-width: v.$desktop) {
+        padding:0 3%;
+    }
 }
 
 .time-text {

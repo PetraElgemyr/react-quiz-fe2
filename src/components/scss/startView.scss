@@ -1,4 +1,13 @@
-.info-text, .name-text {
+@use "mixins" as m;
+
+.info-text,
+.name-text {
     color: white;
     width: 100%;
+}
+
+form.name-form {
+    width: 100%;
+    @include m.centering-col;
+    gap: 20px
 }

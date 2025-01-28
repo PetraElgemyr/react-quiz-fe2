@@ -1,8 +1,23 @@
 html,
 body {
     min-height: 100vh;
-    background: linear-gradient(45deg, #BE7241, #BE418D);
-    font-family: Georgia, serif
+    background: linear-gradient(45deg, #BE7241, #BE418D, #da6440);
+    background-size: 350% 350%;
+    animation: gradient 13s ease infinite;
+    font-family: Georgia, serif;
+}
+
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 * {
