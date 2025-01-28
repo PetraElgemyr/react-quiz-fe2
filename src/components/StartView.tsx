@@ -15,7 +15,7 @@ import { TextFieldTheme } from "./themes/TextFieldTheme";
 import goldenBall from "../golden-ball.png";
 import "./scss/startView.scss";
 import { GoldenBallContainer } from "../styled/GoldenBallContainer";
-import { LogoImg } from "../styled/LogoImg";
+import { StyledImg } from "../styled/Images";
 
 interface IStartView {
   setShowStartView: (val: boolean) => void;
@@ -78,7 +78,7 @@ export const StartView = ({ setShowStartView }: IStartView) => {
             Dags att ta reda på det. Det har blivit dags för... frågeceremoni!🤗
           </h4>
           <GoldenBallContainer>
-            <LogoImg src={goldenBall} alt="golden-ball" />
+            <StyledImg src={goldenBall} alt="golden-ball" />
           </GoldenBallContainer>
           <h4 className="name-text">Ange namn:</h4>{" "}
         </StartContainer>

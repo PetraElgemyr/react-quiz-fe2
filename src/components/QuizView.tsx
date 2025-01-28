@@ -9,7 +9,7 @@ import { QuestionCard } from "./QuestionCard";
 import { ButtonTheme } from "./themes/ButtonTheme";
 import "./scss/quizView.scss";
 import { GoldenBallContainer } from "../styled/GoldenBallContainer";
-import { LogoImg } from "../styled/LogoImg";
+import { StyledImg } from "../styled/Images";
 import goldenBall from "../golden-ball.png";
 import crackedGolden from "../cracked-golden.png";
 
@@ -91,7 +91,7 @@ export const QuizView = () => {
   return (
     <div className="container">
       <GoldenBallContainer>
-        <LogoImg
+        <StyledImg
           src={!showNextButton && !isTimerPaused ? goldenBall : crackedGolden}
           alt="golden-ball"
         />
