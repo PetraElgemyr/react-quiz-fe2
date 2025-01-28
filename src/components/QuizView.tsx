@@ -79,10 +79,15 @@ export const QuizView = () => {
       setIsTimerPaused(true);
       setShowNextButton(true);
       setShowCorrectAnswer(true);
+
+      // nästa fråga körs efter 2.5sek om användaren inte klickar på nästa knapp
+      setInterval(() => {
+        triggerNextQuestion();
+      }, 2500);
     }
 
     return () => clearInterval(timer);
-  }, [counter, isTimerPaused]);
+  }, [counter, isTimerPaused, triggerNextQuestion]);
 
   useEffect(() => {
     setIsTimerPaused(false);
