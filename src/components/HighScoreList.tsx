@@ -8,16 +8,22 @@ export const HighScoreList = () => {
 
   return (
     <>
-      <Headline>Topplista</Headline>
+      <Headline>Topp 5</Headline>
       {players.length > 0 &&
         players
           .sort((a, b) => b.score - a.score)
-          .map((p, i) => (
-            <div className="list-container" key={`${p.name}-${i}`}>
-              <HighScoreText isbold={"true"}>{p.name}</HighScoreText>
-              <HighScoreText isbold={"false"}>- {p.score} poäng</HighScoreText>
-            </div>
-          ))}
+          .map((p, i) => {
+            if (i <= 4) {
+              return (
+                <div className="list-container" key={`${p.name}-${i}`}>
+                  <HighScoreText isbold={"true"}>{p.name}</HighScoreText>
+                  <HighScoreText isbold={"false"}>
+                    - {p.score} poäng
+                  </HighScoreText>
+                </div>
+              );
+            }
+          })}
     </>
   );
 };
