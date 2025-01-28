@@ -112,10 +112,19 @@ export const QuestionCard = ({
         }}
       >
         <CardContent sx={{ margin: 0, padding: 0 }}>
-          <Typography gutterBottom variant="h5" component="div" color="black">
+          <Typography
+            gutterBottom
+            variant="h6"
+            color="black"
+            fontFamily={"Georgia, serif"}
+          >
             Fråga {question.id}
           </Typography>
-          <Typography variant="body2" color="black">
+          <Typography
+            fontFamily={"Georgia, serif"}
+            variant="body1"
+            color="black"
+          >
             {question.question}
           </Typography>
         </CardContent>
