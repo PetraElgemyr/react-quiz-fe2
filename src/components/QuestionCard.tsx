@@ -176,7 +176,11 @@ export const QuestionCard = ({
                     },
                   }}
                 >
-                  <Typography color="black" variant="body1">
+                  <Typography
+                    color="black"
+                    variant="body1"
+                    fontFamily={"Georgia, serif"}
+                  >
                     {opt}
                   </Typography>
                 </CardContent>

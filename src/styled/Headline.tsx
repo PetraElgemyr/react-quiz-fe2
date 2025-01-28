@@ -5,12 +5,16 @@ export const Headline = styled.h1`
 `;
 
 export const CurrentResultHeadline = styled.h2`
-  padding-top: 5%;
+  margin: 0;
+  padding: 4% 0 2% 0;
+  font-family: Georgia, serif;
 `;
 
 export const ResultText = styled.h3`
-  margin-top: 0;
-  font-weight: bold;
+  margin: 0;
+  padding: 1% 0 2% 0;
+  font-weight: normal;
+  font-family: Georgia, serif;
 `;
 
 export const GoldenO = styled.img`
