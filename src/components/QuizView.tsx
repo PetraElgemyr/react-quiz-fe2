@@ -76,14 +76,7 @@ export const QuizView = () => {
     }, 1000);
 
     if (counter === 0) {
-      setIsTimerPaused(true);
-      setShowNextButton(true);
-      setShowCorrectAnswer(true);
-
-      // nästa fråga körs efter 2.5sek om användaren inte klickar på nästa knapp
-      setInterval(() => {
-        triggerNextQuestion();
-      }, 2500);
+      triggerNextQuestion();
     }
 
     return () => clearInterval(timer);
