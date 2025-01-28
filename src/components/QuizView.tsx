@@ -137,7 +137,14 @@ export const QuizView = () => {
           },
           display: "flex",
           justifyContent: "end",
-          paddingTop: "4%",
+          paddingTop: {
+            xxs: "5%",
+            xs: "5%",
+            sm: "4%",
+            md: "3%",
+            lg: "2%",
+            xl: "2%",
+          },
         }}
       >
         {showNextButton && (
