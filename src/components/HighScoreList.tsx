@@ -5,7 +5,7 @@ import "./scss/highscore.scss";
 import goldenBall from "../golden-ball.png";
 
 export const HighScoreList = () => {
-  const { players } = useAppContext();
+  const { players, currentPlayer } = useAppContext();
 
   return (
     <>
@@ -21,8 +21,14 @@ export const HighScoreList = () => {
             if (i <= 4) {
               return (
                 <div className="list-container" key={`${p.name}-${i}`}>
-                  <HighScoreText isbold={"true"}>{p.name}</HighScoreText>
-                  <HighScoreText isbold={"false"}>
+                  <HighScoreText
+                    isbold={currentPlayer.name === p.name ? "true" : ""}
+                  >
+                    {p.name}
+                  </HighScoreText>
+                  <HighScoreText
+                    isbold={currentPlayer.name === p.name ? "true" : ""}
+                  >
                     - {p.score} poäng
                   </HighScoreText>
                 </div>
