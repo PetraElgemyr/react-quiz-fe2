@@ -11,6 +11,6 @@ export const AnswersContainer = styled.div`
   padding: 5%;
 
   @media screen and (${devices.laptop}) {
-    gap: 30px;
+    gap: 25px;
   }
 `;
