@@ -10,4 +10,8 @@ export const ResultPageButtonContainer = styled(RowCentered)`
   @media screen and (${devices.tablet}) {
     gap: 20px;
   }
+
+  @media screen and (${devices.laptop}) {
+    padding: 1%;
+  }
 `;
