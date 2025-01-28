@@ -1,5 +1,5 @@
 import TextField from "@mui/material/TextField";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Button, ThemeProvider } from "@mui/material";
 import { ColCentered } from "../styled/Common/Common";
@@ -25,13 +25,17 @@ export const StartView = ({ setShowStartView }: IStartView) => {
     setCurrentQuestionNumber,
     questions,
   } = useAppContext();
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentPlayer({ ...currentPlayer, name: e.target.value });
   };
 
   const checkIfNameIsValid = () => {
-    if (currentPlayer.name.length > 0) {
+    if (
+      // currentPlayer.name.length > 0 &&
+      currentPlayer.name.trim().length > 0
+    ) {
       return true;
     }
     return false;
@@ -55,6 +59,15 @@ export const StartView = ({ setShowStartView }: IStartView) => {
     setCurrentPlayer(new Player(uuidv4().toString(), "", 0, emptyAnswers));
   }, [setCurrentQuestionNumber, setCurrentPlayer, questions]);
 
+  const handleSubmit = () => {
+    setIsSubmitted(true);
+    const isValid = checkIfNameIsValid();
+    if (isValid) {
+      addNewPlayerToLS();
+      setShowStartView(false);
+    }
+  };
+
   return (
     <>
       <ColCentered>
@@ -68,31 +81,30 @@ export const StartView = ({ setShowStartView }: IStartView) => {
         </StartContainer>
 
         <RegistrationContainer>
-          <ThemeProvider theme={TextFieldTheme}>
-            <TextField
-              label="Namn"
-              helperText={
-                currentPlayer.name.length < 1
-                  ? "Du måste ange ett namn med minst ett tecken"
-                  : ""
-              }
-              onChange={handleNameChange}
-            />
-          </ThemeProvider>
-          <ThemeProvider theme={ButtonTheme}>
-            <Button
-              disabled={currentPlayer.name.length <= 0}
-              onClick={() => {
-                const isValid = checkIfNameIsValid();
-                if (isValid) {
-                  addNewPlayerToLS();
-                  setShowStartView(false);
+          <form
+            autoComplete="off"
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <ThemeProvider theme={TextFieldTheme}>
+              <TextField
+                label="Namn"
+                helperText={
+                  currentPlayer.name.trim().length < 1 && isSubmitted
+                    ? "Du måste ange ett namn med minst ett tecken"
+                    : ""
                 }
-              }}
-            >
-              Starta
-            </Button>
-          </ThemeProvider>
+                onChange={handleNameChange}
+              />
+            </ThemeProvider>
+            <ThemeProvider theme={ButtonTheme}>
+              <Button type="submit" disabled={currentPlayer.name.length <= 0}>
+                Starta
+              </Button>
+            </ThemeProvider>
+          </form>
         </RegistrationContainer>
       </ColCentered>
     </>
