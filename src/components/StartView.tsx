@@ -73,14 +73,13 @@ export const StartView = ({ setShowStartView }: IStartView) => {
       <ColCentered>
         <StartContainer>
           <h4 className="info-text">
-            Har DU alla attribut och kunskaper som krävs för att medverka i en
-            Paradise Hotel säsong? Är du smartare än en klassisk PH-deltagare?
-            Dags att ta reda på det. Det har blivit dags för... frågeceremoni!🤗
+            Har DU alla egenskaper och kunskaper som krävs för att medverka i en
+            klassisk Paradise Hotel säsong? Är du smartare än en äkta
+            PH-deltagare? Det har blivit dags för... frågeceremoni!🤗
           </h4>
           <GoldenBallContainer>
             <StyledImg src={goldenBall} alt="golden-ball" />
           </GoldenBallContainer>
-          <h4 className="name-text">Ange namn:</h4>{" "}
         </StartContainer>
 
         <RegistrationContainer>
@@ -106,7 +105,7 @@ export const StartView = ({ setShowStartView }: IStartView) => {
             </ThemeProvider>
             <ThemeProvider theme={ButtonTheme}>
               <Button type="submit" disabled={currentPlayer.name.length <= 0}>
-                Starta
+                Starta quiz
               </Button>
             </ThemeProvider>
           </form>

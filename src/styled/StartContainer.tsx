@@ -8,7 +8,7 @@ export const StartContainer = styled(ColCentered)`
   text-align: center;
 
   @media screen and (${devices.mobileL}) {
-    width: 80%;
+    width: 85%;
   }
 
   @media screen and (${devices.tablet}) {
@@ -23,7 +23,7 @@ export const StartContainer = styled(ColCentered)`
   }
 
   @media screen and (${devices.fourK}) {
-    width: 30%;
+    width: 35%;
   }
 `;
 

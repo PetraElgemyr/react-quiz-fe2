@@ -1,27 +1,27 @@
 [
   {
     "id": 1,
-    "question": "Vilket av dessa år var ett skottår?",
-    "options": ["2001", "2002", "2003", "2004"],
-    "answer": "2004"
+    "question": "Hur många världsdelar finns det?",
+    "options": ["5", "6", "7", "8"],
+    "answer": "7"
   },
   {
     "id": 2,
-    "question": "Vilket land har flest öar i världen?",
-    "options": ["Finland", "Filippinerna", "Kanada", "Sverige"],
-    "answer": "Sverige"
-  },
-  {
-    "id": 3,
     "question": "Vilken är den femte planeten i vårat solsystem?",
     "options": ["Uranus", "Neptunus", "Jupiter", "Saturnus"],
     "answer": "Jupiter"
   },
   {
+    "id": 3,
+    "question": "Hur många stjärnor har USA:s flagga?",
+    "options": ["49", "50", "51", "52"],
+    "answer": "50"
+  },
+  {
     "id": 4,
-    "question": "Vad är 53+21?",
-    "options": ["77", "75", "74", "72"],
-    "answer": "74"
+    "question": "Vilket av dessa år var ett skottår?",
+    "options": ["2001", "2002", "2003", "2004"],
+    "answer": "2004"
   },
   {
     "id": 5,
@@ -38,26 +38,31 @@
   {
     "id": 7,
     "question": "Vilken av följande är inte en hundras?",
-    "options": ["Jämthund", "Pumi", "Låglandsterrier", "Akita"],
+    "options": [
+      "Låglandsterrier",
+      "Kerry blue terrier",
+      "Silky terrier",
+      "Bullterrier"
+    ],
     "answer": "Låglandsterrier"
   },
   {
     "id": 8,
+    "question": "Vad är (4+22)/2?",
+    "options": ["15", "17", "13", "11"],
+    "answer": "13"
+  },
+  {
+    "id": 9,
     "question": "Vilket av talen är ett primtal?",
     "options": ["102", "19", "81", "76"],
     "answer": "19"
   },
   {
-    "id": 9,
-    "question": "Hur många stjärnor har USA:s flagga?",
-    "options": ["49", "50", "51", "52"],
-    "answer": "50"
-  },
-  {
     "id": 10,
-    "question": "Hur många världsdelar finns det?",
-    "options": ["5", "6", "7", "8"],
-    "answer": "7"
+    "question": "Vilket land har flest öar i världen?",
+    "options": ["Finland", "Filippinerna", "Sverige", "Kanada"],
+    "answer": "Sverige"
   },
   {
     "id": 11,
