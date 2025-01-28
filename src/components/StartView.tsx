@@ -32,10 +32,7 @@ export const StartView = ({ setShowStartView }: IStartView) => {
   };
 
   const checkIfNameIsValid = () => {
-    if (
-      // currentPlayer.name.length > 0 &&
-      currentPlayer.name.trim().length > 0
-    ) {
+    if (currentPlayer.name.trim().length > 0) {
       return true;
     }
     return false;
@@ -82,6 +79,7 @@ export const StartView = ({ setShowStartView }: IStartView) => {
 
         <RegistrationContainer>
           <form
+            className="name-form"
             autoComplete="off"
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               e.preventDefault();
@@ -90,6 +88,7 @@ export const StartView = ({ setShowStartView }: IStartView) => {
           >
             <ThemeProvider theme={TextFieldTheme}>
               <TextField
+                fullWidth
                 label="Namn"
                 helperText={
                   currentPlayer.name.trim().length < 1 && isSubmitted
