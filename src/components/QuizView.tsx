@@ -92,7 +92,7 @@ export const QuizView = () => {
           if (i === currentQuestionNumber) {
             return (
               <QuestionCard
-                key={`${q.id}-${q.answer}-${i}`}
+                key={`qc-${q.id}-${q.answer}-${i}`}
                 updateCurrentPlayerInLS={updateCurrentPlayerInLS}
                 triggerNewQuestion={() => {
                   triggerNextQuestion();
