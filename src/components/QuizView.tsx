@@ -147,25 +147,24 @@ export const QuizView = () => {
           },
         }}
       >
-        {showNextButton && (
-          <ThemeProvider theme={ButtonTheme}>
-            <Button
-              sx={{
-                marginBottom: {
-                  xxs: "20%",
-                  xs: "20%",
-                  sm: "10%",
-                  md: "10%",
-                  lg: "10%",
-                  xl: "10%",
-                },
-              }}
-              onClick={() => triggerNextQuestion()}
-            >
-              Nästa
-            </Button>
-          </ThemeProvider>
-        )}
+        <ThemeProvider theme={ButtonTheme}>
+          <Button
+            sx={{
+              visibility: showNextButton ? "visible" : "hidden",
+              marginBottom: {
+                xxs: "20%",
+                xs: "20%",
+                sm: "10%",
+                md: "10%",
+                lg: "10%",
+                xl: "10%",
+              },
+            }}
+            onClick={() => triggerNextQuestion()}
+          >
+            Nästa
+          </Button>
+        </ThemeProvider>
       </Box>
     </div>
   );
