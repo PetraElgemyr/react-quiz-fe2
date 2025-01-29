@@ -149,7 +149,21 @@ export const QuizView = () => {
       >
         {showNextButton && (
           <ThemeProvider theme={ButtonTheme}>
-            <Button onClick={() => triggerNextQuestion()}>Nästa</Button>
+            <Button
+              sx={{
+                marginBottom: {
+                  xxs: "20%",
+                  xs: "20%",
+                  sm: "10%",
+                  md: "2%",
+                  lg: "2%",
+                  xl: "2%",
+                },
+              }}
+              onClick={() => triggerNextQuestion()}
+            >
+              Nästa
+            </Button>
           </ThemeProvider>
         )}
       </Box>
