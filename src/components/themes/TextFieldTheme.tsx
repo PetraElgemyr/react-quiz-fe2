@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { Colors } from "../../styled/Variables/Colors";
 
 export const TextFieldTheme = createTheme({
   components: {
@@ -10,19 +11,20 @@ export const TextFieldTheme = createTheme({
     MuiInput: {
       styleOverrides: {
         root: {
+          color: Colors.secondaryGold,
           "&:after": {
-            borderBottomColor: "white",
+            borderBottomColor: Colors.secondaryGold,
           },
           "&:before": {
-            borderBottomColor: "white",
+            borderBottomColor: Colors.secondaryGold,
           },
           "&:hover:not(.Mui-disabled):before": {
-            borderBottomColor: "white",
+            borderBottomColor: Colors.secondaryGold,
           },
         },
         input: {
           "&:focus": {
-            color: "white",
+            color: Colors.secondaryGold,
           },
         },
       },
@@ -30,9 +32,9 @@ export const TextFieldTheme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: "white",
+          color: Colors.secondaryGold,
           "&.Mui-focused": {
-            color: "white",
+            color: Colors.secondaryGold,
           },
         },
       },
@@ -40,7 +42,7 @@ export const TextFieldTheme = createTheme({
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          color: "white",
+          color: Colors.secondaryGold,
         },
       },
     },
