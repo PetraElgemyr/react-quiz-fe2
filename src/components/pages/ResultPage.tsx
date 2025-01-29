@@ -78,7 +78,7 @@ export const ResultPage = () => {
         <AnswersContainer>
           {questions.map((q, i) => (
             <Card
-              key={`${q.id}-${q.answer}-${i}`}
+              key={`result-QC-${q.id}-${i}`}
               sx={{
                 padding: {
                   xxs: "10%",
@@ -105,15 +105,22 @@ export const ResultPage = () => {
               }}
             >
               <CardContent sx={{ margin: 0, padding: 0 }}>
-                <Typography variant="body2" color="black">
+                <Typography
+                  variant="body1"
+                  color="black"
+                  fontFamily={"Georgia, serif"}
+                >
                   {q.question}
                 </Typography>
               </CardContent>
 
               {q.options.map((opt, i) => (
-                <ThemeProvider theme={QuestionOptionCardTheme}>
+                <ThemeProvider
+                  theme={QuestionOptionCardTheme}
+                  key={`result-tp-${opt}-${i}`}
+                >
                   <Card
-                    key={`${opt}-ind-${i}`}
+                    key={`result-opt-card-${opt}-${i}`}
                     sx={{
                       padding: 0,
                       margin: 0,
@@ -146,7 +153,11 @@ export const ResultPage = () => {
                           },
                         }}
                       >
-                        <Typography color="black" variant="body1">
+                        <Typography
+                          fontFamily={"Georgia, serif"}
+                          color="black"
+                          variant="body1"
+                        >
                           {opt}
                         </Typography>
                       </CardContent>

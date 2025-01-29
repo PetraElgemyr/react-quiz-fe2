@@ -1,8 +1,9 @@
 @use "mixins" as m;
+@use "variables" as v;
 
 .info-text,
 .name-text {
-    color: white;
+    color: v.$secondaryGold;
     width: 100%;
     font-weight: normal;
     font-family: Georgia, serif;
@@ -11,5 +12,5 @@
 form.name-form {
     width: 100%;
     @include m.centering-col;
-    gap: 20px
+    gap: 20px;
 }

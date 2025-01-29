@@ -88,7 +88,7 @@ export const QuizView = () => {
 
   return (
     <div className="container">
-      <GoldenBallContainer>
+      <GoldenBallContainer width="25%">
         <StyledImg
           src={!showNextButton && !isTimerPaused ? goldenBall : crackedGolden}
           alt="golden-ball"
@@ -100,7 +100,7 @@ export const QuizView = () => {
           if (i === currentQuestionNumber) {
             return (
               <QuestionCard
-                key={`qc-${q.id}-${q.answer}-${i}`}
+                key={`quiz-QC-${q.id}-${q.answer}-i-${i}`}
                 updateCurrentPlayerInLS={updateCurrentPlayerInLS}
                 triggerNewQuestion={() => {
                   triggerNextQuestion();
@@ -147,11 +147,24 @@ export const QuizView = () => {
           },
         }}
       >
-        {showNextButton && (
-          <ThemeProvider theme={ButtonTheme}>
-            <Button onClick={() => triggerNextQuestion()}>Nästa</Button>
-          </ThemeProvider>
-        )}
+        <ThemeProvider theme={ButtonTheme}>
+          <Button
+            sx={{
+              visibility: showNextButton ? "visible" : "hidden",
+              marginBottom: {
+                xxs: "20%",
+                xs: "20%",
+                sm: "10%",
+                md: "10%",
+                lg: "10%",
+                xl: "10%",
+              },
+            }}
+            onClick={() => triggerNextQuestion()}
+          >
+            Nästa
+          </Button>
+        </ThemeProvider>
       </Box>
     </div>
   );

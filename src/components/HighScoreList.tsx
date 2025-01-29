@@ -20,14 +20,14 @@ export const HighScoreList = () => {
           .map((p, i) => {
             if (i <= 4) {
               return (
-                <div className="list-container" key={`${p.name}-${i}`}>
+                <div className="list-container" key={`player-${p.name}-${i}`}>
                   <HighScoreText
-                    isbold={currentPlayer.name === p.name ? "true" : ""}
+                    bold={currentPlayer.name === p.name ? "bold" : "normal"}
                   >
                     {`${i + 1}. ${p.name}`}
                   </HighScoreText>
                   <HighScoreText
-                    isbold={currentPlayer.name === p.name ? "true" : ""}
+                    bold={currentPlayer.name === p.name ? "bold" : "normal"}
                   >
                     {` - ${p.score}`} poäng
                   </HighScoreText>

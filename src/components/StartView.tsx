@@ -77,7 +77,7 @@ export const StartView = ({ setShowStartView }: IStartView) => {
             klassisk Paradise Hotel säsong? Är du smartare än en äkta
             PH-deltagare? Det har blivit dags för... frågeceremoni!🤗
           </h4>
-          <GoldenBallContainer>
+          <GoldenBallContainer width="35%">
             <StyledImg src={goldenBall} alt="golden-ball" />
           </GoldenBallContainer>
         </StartContainer>
