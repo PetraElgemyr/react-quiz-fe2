@@ -7,7 +7,9 @@ export const ButtonTheme = createTheme({
       defaultProps: {
         size: "large",
         variant: "contained",
-        sx: {
+      },
+      styleOverrides: {
+        root: {
           background: Colors.primaryGold,
           color: "black",
           fontFamily: "Georgia, serif",
