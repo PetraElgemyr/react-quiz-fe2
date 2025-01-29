@@ -54,20 +54,26 @@
   },
   {
     "id": 9,
-    "question": "Vilket av talen är ett primtal?",
-    "options": ["102", "19", "81", "76"],
-    "answer": "19"
+    "question": "Vilket av dessa är inte ett däggdjur",
+    "options": ["Späckhuggare", "Näbbdjur", "Krokodil", "Flodhäst"],
+    "answer": "Krokodil"
   },
   {
     "id": 10,
-    "question": "Vilket land har flest öar i världen?",
-    "options": ["Finland", "Filippinerna", "Sverige", "Kanada"],
-    "answer": "Sverige"
+    "question": "Vilket av talen är ett primtal?",
+    "options": ["102", "19", "81", "76"],
+    "answer": "19"
   },
   {
     "id": 11,
     "question": "Från vilket djurs mjölk tillverkas vanlig mozzarella ifrån?",
     "options": ["Get", "Kamel", "Får", "Ko"],
     "answer": "Ko"
+  },
+  {
+    "id": 12,
+    "question": "Vilket land har flest öar i världen?",
+    "options": ["Finland", "Filippinerna", "Sverige", "Kanada"],
+    "answer": "Sverige"
   }
 ]
