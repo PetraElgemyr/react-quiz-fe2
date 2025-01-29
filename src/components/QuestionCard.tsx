@@ -79,7 +79,7 @@ export const QuestionCard = ({
   return (
     <>
       <Card
-        key={`q-${question.id}-${question.question}-${question.answer}`}
+        key={`quiz-QC-${question.id}-${question.answer}`}
         sx={{
           background: Colors.primaryGold,
           padding: {
@@ -129,9 +129,12 @@ export const QuestionCard = ({
           </Typography>
         </CardContent>
         {question.options.map((opt, i) => (
-          <ThemeProvider theme={QuestionOptionCardTheme} key={`${opt}-${i}`}>
+          <ThemeProvider
+            theme={QuestionOptionCardTheme}
+            key={`quiz-tp-${opt}-${i}`}
+          >
             <Card
-              key={`${opt}-ind-${i}`}
+              key={`quiz-opt-${opt}-${i}`}
               sx={{
                 boxShadow: `${
                   selectedOpt === opt ? "inset 0 0 8px rgb(46, 45, 45)" : "none"

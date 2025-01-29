@@ -20,7 +20,7 @@ export const HighScoreList = () => {
           .map((p, i) => {
             if (i <= 4) {
               return (
-                <div className="list-container" key={`${p.name}-${i}`}>
+                <div className="list-container" key={`player-${p.name}-${i}`}>
                   <HighScoreText
                     bold={currentPlayer.name === p.name ? "bold" : "normal"}
                   >
