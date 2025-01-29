@@ -13,4 +13,8 @@ export const HeaderWrapper = styled.header`
     padding: 1%;
     padding-top: 3%;
   }
+
+  @media screen and (${devices.laptop}) {
+    padding: 1% 0 0 0;
+  }
 `;

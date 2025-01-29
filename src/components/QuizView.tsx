@@ -155,9 +155,9 @@ export const QuizView = () => {
                   xxs: "20%",
                   xs: "20%",
                   sm: "10%",
-                  md: "2%",
-                  lg: "2%",
-                  xl: "2%",
+                  md: "10%",
+                  lg: "10%",
+                  xl: "10%",
                 },
               }}
               onClick={() => triggerNextQuestion()}
