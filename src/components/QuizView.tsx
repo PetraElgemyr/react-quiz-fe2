@@ -88,7 +88,7 @@ export const QuizView = () => {
 
   return (
     <div className="container">
-      <GoldenBallContainer>
+      <GoldenBallContainer width="20%">
         <StyledImg
           src={!showNextButton && !isTimerPaused ? goldenBall : crackedGolden}
           alt="golden-ball"

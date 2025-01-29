@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { devices } from "./Variables/Devices";
 
-export const GoldenBallContainer = styled.div`
-  width: 35%;
+interface IGoldenBallContainer {
+  width: string;
+}
+
+export const GoldenBallContainer = styled.div<IGoldenBallContainer>`
+  width: ${(props: IGoldenBallContainer) => props.width};
   padding: 0;
   margin: 0;
 
@@ -18,3 +22,7 @@ export const GoldenBallContainer = styled.div`
     width: 8%;
   }
 `;
+
+// export const GoldenBallQuizContainer = styled(GoldenBallStartContainer)`
+//   width: 20%;
+// `;
