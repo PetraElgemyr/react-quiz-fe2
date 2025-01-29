@@ -105,7 +105,11 @@ export const ResultPage = () => {
               }}
             >
               <CardContent sx={{ margin: 0, padding: 0 }}>
-                <Typography variant="body2" color="black">
+                <Typography
+                  variant="body1"
+                  color="black"
+                  fontFamily={"Georgia, serif"}
+                >
                   {q.question}
                 </Typography>
               </CardContent>
@@ -146,7 +150,11 @@ export const ResultPage = () => {
                           },
                         }}
                       >
-                        <Typography color="black" variant="body1">
+                        <Typography
+                          fontFamily={"Georgia, serif"}
+                          color="black"
+                          variant="body1"
+                        >
                           {opt}
                         </Typography>
                       </CardContent>
