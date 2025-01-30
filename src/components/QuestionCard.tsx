@@ -19,8 +19,6 @@ interface IQuestionCardProps {
   updateCurrentPlayerInLS: (p: Player) => void;
   registerClickedAnswer: () => void;
   isTimerPaused: boolean;
-  showCorrectAnswer: boolean;
-  setShowCorrectAnswer: (val: boolean) => void;
   selectedOpt: string;
   setSelectedOpt: (opt: string) => void;
 }
@@ -30,8 +28,6 @@ export const QuestionCard = ({
   updateCurrentPlayerInLS,
   registerClickedAnswer,
   isTimerPaused,
-  showCorrectAnswer,
-  setShowCorrectAnswer,
   selectedOpt,
   setSelectedOpt,
 }: IQuestionCardProps) => {
@@ -146,7 +142,7 @@ export const QuestionCard = ({
                   : undefined,
                 transition: "box-shadow 0.2s ease",
                 backgroundColor: `${
-                  showCorrectAnswer
+                  isTimerPaused
                     ? opt === question.answer
                       ? Colors.primaryGreen
                       : selectedOpt === opt
@@ -158,9 +154,8 @@ export const QuestionCard = ({
             >
               <CardActionArea
                 onClick={() => {
-                  if (!isTimerPaused && !showCorrectAnswer) {
+                  if (!isTimerPaused) {
                     setSelectedOpt(opt);
-                    setShowCorrectAnswer(true);
                     registerClickedAnswer();
                     registerAnswer(opt);
                   }

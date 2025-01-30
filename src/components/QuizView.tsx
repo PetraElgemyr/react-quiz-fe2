@@ -8,7 +8,7 @@ import { Player } from "./models/Player";
 import { QuestionCard } from "./QuestionCard";
 import { ButtonTheme } from "./themes/ButtonTheme";
 import "./scss/quizView.scss";
-import { GoldenBallContainer } from "../styled/GoldenBallContainer";
+import { GoldenBallQuizContainer } from "../styled/GoldenBallContainer";
 import { StyledImg } from "../styled/Images";
 import goldenBall from "../golden-ball.png";
 import crackedGolden from "../cracked-golden.png";
@@ -23,7 +23,6 @@ export const QuizView = () => {
   const [counter, setCounter] = useState(10);
   const [showNextButton, setShowNextButton] = useState<boolean>(false);
   const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
-  const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
   const [selectedOpt, setSelectedOpt] = useState<string>("");
   const navigate = useNavigate();
 
@@ -56,7 +55,6 @@ export const QuizView = () => {
     }
 
     setShowNextButton(false);
-    setShowCorrectAnswer(false);
     setIsTimerPaused(false);
     setCurrentQuestionNumber(currentQuestionNumber + 1);
     setCounter(10);
@@ -88,12 +86,12 @@ export const QuizView = () => {
 
   return (
     <div className="container">
-      <GoldenBallContainer width="25%">
+      <GoldenBallQuizContainer>
         <StyledImg
           src={!showNextButton && !isTimerPaused ? goldenBall : crackedGolden}
           alt="golden-ball"
         />
-      </GoldenBallContainer>
+      </GoldenBallQuizContainer>
       <p className="time-text">Tid kvar: {counter} sekunder ⏳</p>
       {currentQuestionNumber <= questions.length - 1 ? (
         questions.map((q, i) => {
@@ -111,10 +109,6 @@ export const QuizView = () => {
                   setIsTimerPaused(true);
                 }}
                 isTimerPaused={isTimerPaused}
-                showCorrectAnswer={showCorrectAnswer}
-                setShowCorrectAnswer={(val: boolean) =>
-                  setShowCorrectAnswer(val)
-                }
                 selectedOpt={selectedOpt}
                 setSelectedOpt={(opt: string) => setSelectedOpt(opt)}
               ></QuestionCard>

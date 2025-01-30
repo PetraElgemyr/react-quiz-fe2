@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { devices } from "./Variables/Devices";
 
-interface IGoldenBallContainer {
-  width: string;
-}
+export const GoldenBallContainer = styled.div`
+  width: 35%;
+  padding: 0;
+  margin: 0;
 
-export const GoldenBallContainer = styled.div<IGoldenBallContainer>`
-  width: ${(props: IGoldenBallContainer) => props.width};
+  @media screen and (${devices.tablet}) {
+    width: 30%;
+  }
+`;
+export const GoldenBallQuizContainer = styled.div`
+  width: 25%;
   padding: 0;
   margin: 0;
 
@@ -22,7 +27,3 @@ export const GoldenBallContainer = styled.div<IGoldenBallContainer>`
     width: 8%;
   }
 `;
-
-// export const GoldenBallQuizContainer = styled(GoldenBallStartContainer)`
-//   width: 20%;
-// `;
